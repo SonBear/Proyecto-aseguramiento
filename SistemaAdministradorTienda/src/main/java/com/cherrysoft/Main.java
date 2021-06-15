@@ -26,8 +26,7 @@ public class Main {
         us.setContraseña("password");
         us.setCorreo("correo");
 
-        System.out.println(usR.findAll());
-        System.out.println(usR.findById(2));
+        usR.save(us);
 
     }
 }
