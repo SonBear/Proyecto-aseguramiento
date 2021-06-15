@@ -39,7 +39,8 @@ public class Cliente {
     private String correo;
     @JoinTable(
             name = "ventas_clientes",
-            joinColumns = @JoinColumn(name = "fk_articulo_id", nullable = false),
+            joinColumns = {
+                @JoinColumn(name = "fk_articulo_id", nullable = false)},
             inverseJoinColumns = @JoinColumn(name = "fk_", nullable = false)
     )
     @ManyToMany(cascade = CascadeType.ALL)
