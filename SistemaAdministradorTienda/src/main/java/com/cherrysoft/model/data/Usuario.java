@@ -1,10 +1,13 @@
 package com.cherrysoft.model.data;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -28,6 +31,9 @@ public class Usuario {
     @Column
     private Integer admin;
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CompraProveedor> comprasProveedor;
+
     public Usuario() {
     }
 
@@ -37,6 +43,14 @@ public class Usuario {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<CompraProveedor> getComprasProveedor() {
+        return comprasProveedor;
+    }
+
+    public void setComprasProveedor(List<CompraProveedor> comprasProveedor) {
+        this.comprasProveedor = comprasProveedor;
     }
 
     public String getCorreo() {

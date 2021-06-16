@@ -1,13 +1,15 @@
 package com.cherrysoft.model.data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -16,7 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "productos")
-public class Producto {
+public class Producto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,11 +33,8 @@ public class Producto {
     @Column
     private BigDecimal precio;
 
-    @Column
-    private Integer cantidad;
-
-    @ManyToMany(mappedBy = "productosComprados")
-    private List<Cliente> clientes;
+    @OneToMany(mappedBy = "producto")
+    private List<ProductoProveedor> productoProveedor;
 
     public Producto() {
     }
@@ -72,25 +71,13 @@ public class Producto {
         this.precio = precio;
     }
 
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public List<Cliente> getClientes() {
-        return clientes;
-    }
-
-    public void setClientes(List<Cliente> clientes) {
-        this.clientes = clientes;
+    public List<Proveedor> getProveedores() {
+        return productoProveedor.stream().map((p) -> p.getProveedor()).collect(Collectors.toList());
     }
 
     @Override
     public String toString() {
-        return "Producto{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio + ", cantidad=" + cantidad + '}';
+        return "Producto{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio + '}';
     }
 
 }

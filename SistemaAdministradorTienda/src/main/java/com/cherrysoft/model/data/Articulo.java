@@ -1,5 +1,6 @@
 package com.cherrysoft.model.data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,14 +17,14 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "inventario")
-public class Articulo {
+public class Articulo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 
     @Column
