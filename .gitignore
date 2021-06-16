@@ -45,6 +45,8 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
+#Persistence
+**/META-INF/persistence.xml
 
 # OS
 .DS_Store
