@@ -18,7 +18,7 @@ public final class EntityManagerGetter {
 
     public static synchronized EntityManager getInstance() {
         if (Objects.isNull(instance)) {
-            instance = Persistence.createEntityManagerFactory(persistenceUnitName).createEntityManager();;
+            instance = Persistence.createEntityManagerFactory(persistenceUnitName).createEntityManager();
         }
         return instance;
     }
