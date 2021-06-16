@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cherrysoft.model.data;
 
 import javax.persistence.Column;
@@ -28,7 +23,7 @@ public class Usuario {
     private String correo;
 
     @Column
-    private String contraseña;
+    private String contrasenia;
 
     @Column
     private Integer admin;
@@ -52,12 +47,12 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasenia() {
+        return contrasenia;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 
     public Integer getAdmin() {
@@ -70,7 +65,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", correo=" + correo + ", contrase\u00f1a=" + contraseña + ", admin=" + admin + '}';
+        return "Usuario{" + "id=" + id + ", correo=" + correo + ", contrasenia=" + contrasenia + ", admin=" + admin + '}';
     }
 
 }
