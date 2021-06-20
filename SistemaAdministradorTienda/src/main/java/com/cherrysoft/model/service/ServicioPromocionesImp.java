@@ -65,7 +65,7 @@ public class ServicioPromocionesImp implements ServicioPromociones {
         promo.setFechaInicio(inicio);
         promo.setFechaFinal(fin);
         repositoryT3.save(promo);    
-        return promo;        
+        return promo;
     }
 
     @Override
