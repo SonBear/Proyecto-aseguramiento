@@ -2,6 +2,7 @@ package com.cherrysoft;
 
 import com.cherrysoft.model.data.Articulo;
 import com.cherrysoft.model.data.ArticuloProveedor;
+import com.cherrysoft.model.data.Promocion;
 import com.cherrysoft.model.data.PromocionArticuloCompra;
 import com.cherrysoft.model.data.PromocionArticuloRegaloPorCompras;
 import com.cherrysoft.model.data.Proveedor;
@@ -86,19 +87,17 @@ public class Main {
         //System.out.println(p.getNombre());
         //System.out.println(p.getProveedorArticulos().get(0).getArticulo().getNombre());
     
-        /*
+        /******************************************
         
             PRUEBAS DE PROMOCIONES
         
-        */
+        ******************************************/
         ServicioPromocionesImp servicio = new ServicioPromocionesImp();
         
         // Promocion Tipo1
         servicio.crearPromocionTipo1(articulo2, 1, 0.1, new Date(2021, 6, 30), new Date(2021, 7, 15));
         
         // Promocion Tipo2
-        PromocionArticuloRegaloPorCompras promo2 = new PromocionArticuloRegaloPorCompras();
-        
         List<PromocionArticuloCompra> promo2Articulos = new ArrayList();
         PromocionArticuloCompra promo2Art1 = new PromocionArticuloCompra();
         promo2Art1.setArticulo(articulo);
@@ -107,8 +106,35 @@ public class Main {
         promo2Art2.setArticulo(articulo2);
         
         promo2Articulos.add(promo2Art1);
-        promo2Articulos.add(promo2Art2);        
+        promo2Articulos.add(promo2Art2);
         
         servicio.crearPromocionTipo2(promo2Articulos, articulo3, new Date(2021, 6, 30), new Date(2021, 7, 15));
+        
+        // Promocion Tipo3        
+        List<PromocionArticuloCompra> promo3Articulos = new ArrayList();
+        PromocionArticuloCompra promo3Art1 = new PromocionArticuloCompra();
+        promo3Art1.setArticulo(articulo2);
+        
+        PromocionArticuloCompra promo3Art2 = new PromocionArticuloCompra();
+        promo3Art2.setArticulo(articulo3);
+        
+        promo3Articulos.add(promo3Art1);
+        promo3Articulos.add(promo3Art2);
+        
+        servicio.crearPromocionTipo3(0.3, promo3Articulos, new Date(2021, 6, 30), new Date(2021, 7, 15));   
+        
+        // Promocion Tipo4
+        servicio.crearPromocionTipo4(0.05, new Date(2021, 6, 30), new Date(2021, 7, 15));
+        
+        // Obtener promociones
+        List<Promocion> promociones = servicio.obtenerPromociones();
+        promociones.forEach(promo -> {
+            System.out.println("promo: " + promo.toString());
+            System.out.println("id: " + promo.getId());
+        });
+        
+        // Eliminar promociones
+        //servicio.eliminarPromocion(promociones.get(2));
+        
     }
 }

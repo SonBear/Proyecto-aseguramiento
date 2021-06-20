@@ -31,6 +31,9 @@ public class PromocionDescuentoArticuloPorCompras extends Promocion {
         this.articulosCompraPromocion = articulosCompraPromocion;
     }
 
+    public PromocionDescuentoArticuloPorCompras() {
+    }
+
     public Double getDescuento() {
         return descuento;
     }

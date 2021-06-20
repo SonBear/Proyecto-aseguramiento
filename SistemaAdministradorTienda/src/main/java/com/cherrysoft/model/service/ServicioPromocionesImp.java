@@ -45,28 +45,35 @@ public class ServicioPromocionesImp implements ServicioPromociones {
     @Override
     public PromocionArticuloRegaloPorCompras crearPromocionTipo2(List<PromocionArticuloCompra> articulosCompraPromocion, Articulo articuloDeRegalo, Date inicio, Date fin) {
         PromocionArticuloRegaloPorCompras promo = new PromocionArticuloRegaloPorCompras();
+        articulosCompraPromocion = this.asociarArticulosConLaPromocion(promo, articulosCompraPromocion);        
+        
         promo.setArticuloDeRegalo(articuloDeRegalo);
         promo.setArticulosCompraPromocion(articulosCompraPromocion);
         promo.setFechaInicio(inicio);
         promo.setFechaFinal(fin);       
-        articulosCompraPromocion.forEach(articulo -> {
-            articulo.setPromocion(promo);
-        });
         repositoryT2.save(promo);
         return promo;
     }
 
     @Override
-    public PromocionDescuentoArticuloPorCompras crearPromocionTipo3(Double descuento, List<PromocionArticuloCompra> articulosCompraPromocion) {
-        PromocionDescuentoArticuloPorCompras promo = new PromocionDescuentoArticuloPorCompras(descuento, articulosCompraPromocion);
+    public PromocionDescuentoArticuloPorCompras crearPromocionTipo3(Double descuento, List<PromocionArticuloCompra> articulosCompraPromocion, Date inicio, Date fin) {
+        PromocionDescuentoArticuloPorCompras promo = new PromocionDescuentoArticuloPorCompras();
+        articulosCompraPromocion = this.asociarArticulosConLaPromocion(promo, articulosCompraPromocion);
+        
+        promo.setDescuento(descuento);
+        promo.setArticulosCompraPromocion(articulosCompraPromocion);
+        promo.setFechaInicio(inicio);
+        promo.setFechaFinal(fin);
         repositoryT3.save(promo);    
         return promo;        
     }
 
     @Override
-    public PromocionGeneralArticulos crearPromocionTipo4(double descuento) {
+    public PromocionGeneralArticulos crearPromocionTipo4(double descuento, Date inicio, Date fin) {
         PromocionGeneralArticulos promo = new PromocionGeneralArticulos(descuento);
-        repositoryT4.save(promo);        
+        promo.setFechaInicio(inicio);
+        promo.setFechaFinal(fin);
+        repositoryT4.save(promo);
         return promo;        
     }
 
@@ -136,4 +143,12 @@ public class ServicioPromocionesImp implements ServicioPromociones {
         System.out.println("Promocion: " + promocion.toString());
         System.out.println("Cliente: " + cliente.getCorreo());
     }
+    
+    private List<PromocionArticuloCompra> asociarArticulosConLaPromocion(Promocion promo, List<PromocionArticuloCompra> articulos) {
+        articulos.forEach(articulo -> {
+            articulo.setPromocion(promo);
+        });        
+        return articulos;
+    }
+    
 }
