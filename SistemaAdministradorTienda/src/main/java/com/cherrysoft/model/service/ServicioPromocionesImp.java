@@ -22,6 +22,7 @@ import com.cherrysoft.model.repository.PromocionGeneralArticulosRepository;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -103,9 +104,10 @@ public class ServicioPromocionesImp implements ServicioPromociones {
 
     @Override
     public Promocion asignarPromocionCliente(Promocion promocion, Cliente cliente) {
-        promocion.addCliente(cliente);
         if(promocion instanceof PromocionDescuentoArticuloCantidad) {
-            repositoryT1.update((PromocionDescuentoArticuloCantidad)promocion);
+            PromocionDescuentoArticuloCantidad promoAlmacenada = repositoryT1.findById(promocion.getId()).get();
+            promoAlmacenada.addCliente(cliente);
+            repositoryT1.update(promoAlmacenada);
         }
         else if(promocion instanceof PromocionArticuloRegaloPorCompras) {
             repositoryT2.update((PromocionArticuloRegaloPorCompras)promocion);

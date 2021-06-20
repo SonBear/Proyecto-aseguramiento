@@ -7,8 +7,10 @@ package com.cherrysoft.controlador;
 
 import com.cherrysoft.model.data.Articulo;
 import com.cherrysoft.model.data.Cliente;
+import com.cherrysoft.model.data.Promocion;
 import com.cherrysoft.model.repository.ArticuloRepository;
 import com.cherrysoft.model.repository.ClienteRepository;
+import com.cherrysoft.model.service.ServicioPromocionesImp;
 import com.cherrysoft.util.EnumTiposDePromociones;
 import com.cherrysoft.vistas.PanelPromocionTipo1;
 import com.cherrysoft.vistas.PanelPromocionTipo2;
@@ -18,10 +20,13 @@ import com.cherrysoft.vistas.VistaPromociones;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 
 /**
@@ -36,6 +41,7 @@ public class ControladorPromociones {
     private ClienteRepository clientesRepository;
     private ArticuloRepository articulosRepository;
     HashMap<Integer, Cliente> clientesAsignados;
+    ServicioPromocionesImp servicioPromociones;
     private VistaPromociones vista;
 
     public ControladorPromociones(VistaPromociones vista) {
@@ -48,6 +54,7 @@ public class ControladorPromociones {
         this.panelTipo2 = new PanelPromocionTipo2();
         this.panelTipo3 = new PanelPromocionTipo3();
         this.panelTipo4 = new PanelPromocionTipo4();
+        this.servicioPromociones = new ServicioPromocionesImp();
         this.loadPanel(panelTipo1);        
         this.vista.getComboTipoPromocion().setModel(new DefaultComboBoxModel(EnumTiposDePromociones.values()));
         
@@ -60,6 +67,7 @@ public class ControladorPromociones {
         this.cargarArticulos();
         
         this.panelTipo1.getBtnAgregarCliente().addActionListener(this::actionAsignarCliente);
+        this.vista.getBtnCrearPromocion().addActionListener(this::actionCrearPromocion);
     }
     
     private void cargarClientes() {
@@ -85,12 +93,27 @@ public class ControladorPromociones {
     private void actionAsignarCliente(ActionEvent e) {
         Cliente seleccion = (Cliente) panelTipo1.getComboClientes().getSelectedItem();        
         clientesAsignados.put(seleccion.getId(), seleccion);
-       /* System.out.println("<--Hashmap-->");        
+        JTable tablaClientes = panelTipo1.getTableClientesAsignados();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Nombre");
+        model.addColumn("Email");
         clientesAsignados.entrySet().forEach(entry -> {
-            System.out.println(entry.getKey());
-            System.out.println(entry.getValue());
-        });
-        System.out.println("<- Fin ->");*/
+           model.addRow(new String[]{entry.getValue().getNombre(), entry.getValue().getCorreo()});
+        });     
+        tablaClientes.setModel(model);
+    }
+    
+    private void actionCrearPromocion(ActionEvent e) {
+        Date inicio = new Date(2021, 6, 30);
+        Date fin = new Date(2021, 7, 15);
+        Articulo articulo = (Articulo) panelTipo1.getComboArticuloAComprar().getSelectedItem();
+        int cantidad = Integer.parseInt(panelTipo1.getTxtCantidad().getText());
+        double descuento = Double.parseDouble(panelTipo1.getTxtDescuento().getText());
+        
+        Promocion promo = servicioPromociones.crearPromocionTipo1(articulo, cantidad, descuento, inicio, fin);
+        clientesAsignados.entrySet().forEach(entry -> {
+            servicioPromociones.asignarPromocionCliente(promo, entry.getValue());
+        });           
     }
     
     private void loadPanel(JPanel panel) {
