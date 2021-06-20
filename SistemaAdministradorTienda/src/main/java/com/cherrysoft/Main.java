@@ -2,11 +2,13 @@ package com.cherrysoft;
 
 import com.cherrysoft.model.data.Articulo;
 import com.cherrysoft.model.data.ArticuloProveedor;
+import com.cherrysoft.model.data.Cliente;
 import com.cherrysoft.model.data.Promocion;
 import com.cherrysoft.model.data.PromocionArticuloCompra;
 import com.cherrysoft.model.data.PromocionArticuloRegaloPorCompras;
 import com.cherrysoft.model.data.Proveedor;
 import com.cherrysoft.model.repository.ArticuloRepository;
+import com.cherrysoft.model.repository.ClienteRepository;
 import com.cherrysoft.model.repository.ProveedorRepository;
 import com.cherrysoft.model.service.ServicioPromocionesImp;
 import java.math.BigDecimal;
@@ -23,6 +25,13 @@ public class Main {
 
     public static void main(String[] args) {
         //test
+        Cliente cliente1 = new Cliente();
+        cliente1.setNombre("Cliente 1");
+        cliente1.setCorreo("Cliente1@correo.com");
+        
+        ClienteRepository clienteRepository = new ClienteRepository();
+        clienteRepository.save(cliente1);
+        
         Articulo articulo = new Articulo();
         articulo.setDescripcion("refresco sabor limon");
         articulo.setCantidad(12);
@@ -135,6 +144,9 @@ public class Main {
         
         // Eliminar promociones
         //servicio.eliminarPromocion(promociones.get(2));
+        
+        // Asociar promocion a un cliente
+        servicio.asignarPromocionCliente(promociones.get(1), cliente1);
         
     }
 }
