@@ -5,9 +5,11 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -29,8 +31,11 @@ public class Cliente implements Serializable {
     @Column
     private String correo;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<CompraCliente> comprasCliente;
+
+    @ManyToMany(mappedBy = "clientes", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Promocion> promociones;
 
     public Cliente() {
     }
@@ -41,6 +46,14 @@ public class Cliente implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<Promocion> getPromociones() {
+        return promociones;
+    }
+
+    public void setPromociones(List<Promocion> promociones) {
+        this.promociones = promociones;
     }
 
     public String getNombre() {

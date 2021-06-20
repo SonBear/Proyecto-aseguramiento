@@ -5,9 +5,7 @@
  */
 package com.cherrysoft.model.data;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,40 +15,33 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.hibernate.annotations.CreationTimestamp;
 
 /**
- *
  *
  * @author Emmanuel Chable
  */
 @Entity
-@Table(name = "historial_compras")
-public class CompraProveedor implements Serializable {
+@Table(name = "venta_articulos")
+public class VentaArticulo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
-    @JoinColumn(name = "articulo_proveedor_id")
-    private ArticuloProveedor articuloProveedor;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
-
     @Column
     private Integer cantidad;
 
-    @Column(name = "fecha_compra")
-    @CreationTimestamp
-    private Date fecha;
-
-    @Column(name = "costo_total")
+    @Column
     private BigDecimal costoTotal;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "articulo_id")
+    private Articulo articulo;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ticket_id")
+    private Ticket ticket;
 
     public Integer getId() {
         return id;
@@ -58,22 +49,6 @@ public class CompraProveedor implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public ArticuloProveedor getArticuloProveedor() {
-        return articuloProveedor;
-    }
-
-    public void setArticuloProveedor(ArticuloProveedor articuloProveedor) {
-        this.articuloProveedor = articuloProveedor;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
     public Integer getCantidad() {
@@ -84,20 +59,28 @@ public class CompraProveedor implements Serializable {
         this.cantidad = cantidad;
     }
 
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
     public BigDecimal getCostoTotal() {
         return costoTotal;
     }
 
     public void setCostoTotal(BigDecimal costoTotal) {
         this.costoTotal = costoTotal;
+    }
+
+    public Articulo getArticulo() {
+        return articulo;
+    }
+
+    public void setArticulo(Articulo articulo) {
+        this.articulo = articulo;
+    }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
     }
 
 }

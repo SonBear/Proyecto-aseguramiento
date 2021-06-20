@@ -5,12 +5,12 @@
  */
 package com.cherrysoft.model.repository;
 
-import com.cherrysoft.model.data.ProductoProveedor;
+import com.cherrysoft.model.data.Articulo;
 
 /**
  *
  * @author Emmanuel Chable
  */
-public class ProductoProveedorRepository extends CrudRepository<ProductoProveedor, Integer> {
+public class ArticuloRepository extends CrudRepository<Articulo, Integer> {
 
 }

@@ -5,6 +5,7 @@
  */
 package com.cherrysoft.model.data;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -14,9 +15,18 @@ import javax.persistence.Table;
  * @author Emmanuel Chable
  */
 @Entity
-@Table(name = "promocion_tipo_1")
-public class PromocionT1 extends Promocion {
+@Table(name = "promocion_tipo_4")
+public class PromocionGeneralArticulos extends Promocion implements Serializable {
 
     @Column
-    private String test;
+    private Double descuento;
+
+    public Double getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(Double descuento) {
+        this.descuento = descuento;
+    }
+
 }

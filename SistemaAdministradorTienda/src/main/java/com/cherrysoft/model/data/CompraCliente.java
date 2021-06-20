@@ -8,6 +8,7 @@ package com.cherrysoft.model.data;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,11 +33,11 @@ public class CompraCliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "articulo_id")
     private Articulo articulo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
@@ -45,7 +46,7 @@ public class CompraCliente implements Serializable {
 
     @Column(name = "fecha_compra")
     @CreationTimestamp
-    private Date fecha;
+    private Date fechaCompra;
 
     @Column(name = "costo_total")
     private BigDecimal costoTotal;
@@ -74,12 +75,20 @@ public class CompraCliente implements Serializable {
         this.cantidad = cantidad;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Date getFechaCompra() {
+        return fechaCompra;
+    }
+
+    public void setFechaCompra(Date fechaCompra) {
+        this.fechaCompra = fechaCompra;
     }
 
     public BigDecimal getCostoTotal() {

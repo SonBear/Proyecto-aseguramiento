@@ -6,24 +6,22 @@
 package com.cherrysoft.model.data;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Emmanuel Chable
  */
 @Entity
+@Table(name = "proveedores")
 public class Proveedor implements Serializable {
 
     @Id
@@ -42,12 +40,8 @@ public class Proveedor implements Serializable {
     @Column
     private String direccion;
 
-    @OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductoProveedor> proveedorProductos;
-
-    public List<Producto> getProductos() {
-        return proveedorProductos.stream().map((p) -> p.getProducto()).collect(Collectors.toList());
-    }
+    @OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL)
+    private List<ArticuloProveedor> proveedorArticulos;
 
     public Integer getId() {
         return id;
@@ -89,9 +83,12 @@ public class Proveedor implements Serializable {
         this.direccion = direccion;
     }
 
-    @Override
-    public String toString() {
-        return "Proveedor{" + "id=" + id + ", nombre=" + nombre + ", telefono=" + telefono + ", email=" + email + ", direccion=" + direccion + '}';
+    public List<ArticuloProveedor> getProveedorArticulos() {
+        return proveedorArticulos;
+    }
+
+    public void setProveedorArticulos(List<ArticuloProveedor> proveedorArticulos) {
+        this.proveedorArticulos = proveedorArticulos;
     }
 
 }

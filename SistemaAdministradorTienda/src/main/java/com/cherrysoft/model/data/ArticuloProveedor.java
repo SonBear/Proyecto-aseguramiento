@@ -5,10 +5,9 @@
  */
 package com.cherrysoft.model.data;
 
-import com.cherrysoft.model.data.Producto;
-import com.cherrysoft.model.data.Proveedor;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,18 +24,18 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "productos_proveedores")
-public class ProductoProveedor implements Serializable {
+public class ArticuloProveedor implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JoinColumn(name = "producto_id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Producto producto;
+    @JoinColumn(name = "articulo_id")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Articulo articulo;
 
     @JoinColumn(name = "proveedor_id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Proveedor proveedor;
 
     @Column
@@ -51,18 +50,6 @@ public class ProductoProveedor implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public Proveedor getProveedor() {
-        return proveedor;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
     }
 
     public void setProveedor(Proveedor proveedor) {
@@ -85,9 +72,16 @@ public class ProductoProveedor implements Serializable {
         this.precio = precio;
     }
 
-    @Override
-    public String toString() {
-        return "ProductoProveedor{" + "id=" + id + ", cantidad=" + cantidad + ", precio=" + precio + '}';
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public Articulo getArticulo() {
+        return articulo;
+    }
+
+    public void setArticulo(Articulo articulo) {
+        this.articulo = articulo;
     }
 
 }

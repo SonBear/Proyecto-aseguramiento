@@ -18,9 +18,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -42,11 +41,11 @@ public class Promocion implements Serializable {
     @Column
     private Date fechaFinal;
 
-    @Column
-    private Boolean esGeneral;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Cliente cliente;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "clientes_promociones",
+            joinColumns = @JoinColumn(name = "promocion_id"),
+            inverseJoinColumns = @JoinColumn(name = "cliente_id"))
+    private List<Cliente> clientes;
 
     public Integer getId() {
         return id;
@@ -72,20 +71,12 @@ public class Promocion implements Serializable {
         this.fechaFinal = fechaFinal;
     }
 
-    public Boolean getEsGeneral() {
-        return esGeneral;
+    public List<Cliente> getClientes() {
+        return clientes;
     }
 
-    public void setEsGeneral(Boolean esGeneral) {
-        this.esGeneral = esGeneral;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
     }
 
 }
