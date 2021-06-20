@@ -1,15 +1,16 @@
 package com.cherrysoft.model.data;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -18,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "clientes")
-public class Cliente {
+public class Cliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,14 +30,12 @@ public class Cliente {
 
     @Column
     private String correo;
-    @JoinTable(
-            name = "ventas_clientes",
-            joinColumns = {
-                @JoinColumn(name = "fk_articulo_id", nullable = false)},
-            inverseJoinColumns = @JoinColumn(name = "fk_", nullable = false)
-    )
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Producto> productosComprados;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<CompraCliente> comprasCliente;
+
+    @ManyToMany(mappedBy = "clientes", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Promocion> promociones;
 
     public Cliente() {
     }
@@ -47,6 +46,14 @@ public class Cliente {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<Promocion> getPromociones() {
+        return promociones;
+    }
+
+    public void setPromociones(List<Promocion> promociones) {
+        this.promociones = promociones;
     }
 
     public String getNombre() {
@@ -65,12 +72,12 @@ public class Cliente {
         this.correo = correo;
     }
 
-    public List<Producto> getProductosComprados() {
-        return productosComprados;
+    public List<CompraCliente> getComprasCliente() {
+        return comprasCliente;
     }
 
-    public void setProductosComprados(List<Producto> productosComprados) {
-        this.productosComprados = productosComprados;
+    public void setComprasCliente(List<CompraCliente> comprasCliente) {
+        this.comprasCliente = comprasCliente;
     }
 
     @Override

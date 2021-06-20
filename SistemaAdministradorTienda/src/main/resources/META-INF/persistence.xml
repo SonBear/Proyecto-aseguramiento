@@ -1,12 +1,19 @@
-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-             version="2.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
     <persistence-unit name="com.cherrysoft.bd">
-        <class>ccom.cherrysoft.model.data.Usuario</class>
+        <class>com.cherrysoft.model.data.Usuario</class>
         <class>com.cherrysoft.model.data.Cliente</class>
-        <class>com.com.cherrysoft.model.data.Producto</class>
-        <class>comcom.cherrysoft.model.data.Articulo</class>
+        <class>com.cherrysoft.model.data.Producto</class>
+        <class>com.cherrysoft.model.data.Articulo</class>
+        <class>com.cherrysoft.model.data.Proveedor</class>
+        <class>com.cherrysoft.model.data.CompraCliente</class>
+        <class>com.cherrysoft.model.data.CompraProveedor</class>
+        <class>com.cherrysoft.model.data.Promocion</class>
+        <class>com.cherrysoft.model.data.PromocionArticuloRegaloPorCompras</class>
+        <class>com.cherrysoft.model.data.PromocionDescuentoArticuloPorCompras</class>
+        <class>com.cherrysoft.model.data.PromocionGeneralArticulos</class>
+        <class>com.cherrysoft.model.data.ArticuloProveedor</class>
+        <class>com.cherrysoft.model.data.PromocionDescuentoArticuloCantidad</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/administrador_tienda"/>
             <property name="javax.persistence.jdbc.user" value="root"/>

@@ -1,10 +1,15 @@
 package com.cherrysoft.model.data;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -26,7 +31,20 @@ public class Usuario {
     private String contrasenia;
 
     @Column
-    private Integer admin;
+    private String nombre;
+
+    @OneToOne
+    @JoinColumn(name = "rol_id")
+    private Permiso permiso;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<CompraProveedor> comprasProveedor;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Historial> bitacora;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Ticket> ticketsGenerados;
 
     public Usuario() {
     }
@@ -37,6 +55,14 @@ public class Usuario {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<CompraProveedor> getComprasProveedor() {
+        return comprasProveedor;
+    }
+
+    public void setComprasProveedor(List<CompraProveedor> comprasProveedor) {
+        this.comprasProveedor = comprasProveedor;
     }
 
     public String getCorreo() {
@@ -55,17 +81,32 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
-    public Integer getAdmin() {
-        return admin;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setAdmin(Integer admin) {
-        this.admin = admin;
+    public Permiso getPermiso() {
+        return permiso;
     }
 
-    @Override
-    public String toString() {
-        return "Usuario{" + "id=" + id + ", correo=" + correo + ", contrasenia=" + contrasenia + ", admin=" + admin + '}';
+    public void setPermiso(Permiso permiso) {
+        this.permiso = permiso;
+    }
+
+    public List<Historial> getBitacora() {
+        return bitacora;
+    }
+
+    public void setBitacora(List<Historial> bitacora) {
+        this.bitacora = bitacora;
+    }
+
+    public List<Ticket> getTicketsGenerados() {
+        return ticketsGenerados;
+    }
+
+    public void setTicketsGenerados(List<Ticket> ticketsGenerados) {
+        this.ticketsGenerados = ticketsGenerados;
     }
 
 }
