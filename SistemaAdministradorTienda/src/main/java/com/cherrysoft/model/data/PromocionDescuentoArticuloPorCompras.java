@@ -26,6 +26,11 @@ public class PromocionDescuentoArticuloPorCompras extends Promocion {
     @OneToMany(mappedBy = "promocion", cascade = CascadeType.ALL)
     private List<PromocionArticuloCompra> articulosCompraPromocion;
 
+    public PromocionDescuentoArticuloPorCompras(Double descuento, List<PromocionArticuloCompra> articulosCompraPromocion) {
+        this.descuento = descuento;
+        this.articulosCompraPromocion = articulosCompraPromocion;
+    }
+
     public Double getDescuento() {
         return descuento;
     }

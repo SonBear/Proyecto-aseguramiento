@@ -29,6 +29,12 @@ public class PromocionDescuentoArticuloCantidad extends Promocion {
     @JoinColumn(name = "articulo_id")
     private Articulo articulo;
 
+    public PromocionDescuentoArticuloCantidad(Articulo articulo, Integer cantidad, Double descuento) {
+        this.cantidad = cantidad;
+        this.descuento = descuento;
+        this.articulo = articulo;
+    }
+
     public Integer getCantidad() {
         return cantidad;
     }
