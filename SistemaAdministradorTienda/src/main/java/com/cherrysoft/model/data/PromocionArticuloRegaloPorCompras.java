@@ -33,6 +33,9 @@ public class PromocionArticuloRegaloPorCompras extends Promocion {
         this.articuloDeRegalo = articuloDeRegalo;
     }
 
+    public PromocionArticuloRegaloPorCompras() {
+    }
+
     public List<PromocionArticuloCompra> getArticulosCompraPromocion() {
         return articulosCompraPromocion;
     }

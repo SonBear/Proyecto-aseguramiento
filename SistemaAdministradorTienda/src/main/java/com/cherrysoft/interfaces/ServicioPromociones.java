@@ -13,6 +13,7 @@ import com.cherrysoft.model.data.PromocionArticuloRegaloPorCompras;
 import com.cherrysoft.model.data.PromocionDescuentoArticuloCantidad;
 import com.cherrysoft.model.data.PromocionDescuentoArticuloPorCompras;
 import com.cherrysoft.model.data.PromocionGeneralArticulos;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,8 +21,8 @@ import java.util.List;
  * @author Equipo1
  */
 public interface ServicioPromociones {
-    public PromocionDescuentoArticuloCantidad crearPromocionTipo1(Articulo articuloAComprar, int cantidad, double descuento);
-    public PromocionArticuloRegaloPorCompras crearPromocionTipo2(List<PromocionArticuloCompra> articulosCompraPromocion, Articulo articuloDeRegalo);
+    public PromocionDescuentoArticuloCantidad crearPromocionTipo1(Articulo articuloAComprar, int cantidad, double descuento, Date inicio, Date fin);
+    public PromocionArticuloRegaloPorCompras crearPromocionTipo2(List<PromocionArticuloCompra> articulosCompraPromocion, Articulo articuloDeRegalo, Date inicio, Date fin);
     public PromocionDescuentoArticuloPorCompras crearPromocionTipo3(Double descuento, List<PromocionArticuloCompra> articulosCompraPromocion);
     public PromocionGeneralArticulos crearPromocionTipo4(double descuento);
     public Iterable<Promocion> obtenerPromociones();

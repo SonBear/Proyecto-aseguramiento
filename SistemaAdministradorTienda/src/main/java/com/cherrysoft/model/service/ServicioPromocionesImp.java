@@ -14,11 +14,13 @@ import com.cherrysoft.model.data.PromocionArticuloRegaloPorCompras;
 import com.cherrysoft.model.data.PromocionDescuentoArticuloCantidad;
 import com.cherrysoft.model.data.PromocionDescuentoArticuloPorCompras;
 import com.cherrysoft.model.data.PromocionGeneralArticulos;
+import com.cherrysoft.model.repository.PromocionArticuloCompraRepository;
 import com.cherrysoft.model.repository.PromocionArticuloRegaloPorComprasRepository;
 import com.cherrysoft.model.repository.PromocionDescuentoArticuloCantidadRepository;
 import com.cherrysoft.model.repository.PromocionDescuentoArticuloPorComprasRepository;
 import com.cherrysoft.model.repository.PromocionGeneralArticulosRepository;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,15 +34,24 @@ public class ServicioPromocionesImp implements ServicioPromociones {
     PromocionGeneralArticulosRepository repositoryT4 = new PromocionGeneralArticulosRepository();
 
     @Override
-    public PromocionDescuentoArticuloCantidad crearPromocionTipo1(Articulo articuloAComprar, int cantidad, double descuento) {
+    public PromocionDescuentoArticuloCantidad crearPromocionTipo1(Articulo articuloAComprar, int cantidad, double descuento, Date inicio, Date fin) {
         PromocionDescuentoArticuloCantidad promo = new PromocionDescuentoArticuloCantidad(articuloAComprar, cantidad, descuento);
+        promo.setFechaInicio(inicio);
+        promo.setFechaFinal(fin);
         repositoryT1.save(promo);
         return promo;
     }
 
     @Override
-    public PromocionArticuloRegaloPorCompras crearPromocionTipo2(List<PromocionArticuloCompra> articulosCompraPromocion, Articulo articuloDeRegalo) {
-        PromocionArticuloRegaloPorCompras promo = new PromocionArticuloRegaloPorCompras(articulosCompraPromocion, articuloDeRegalo);
+    public PromocionArticuloRegaloPorCompras crearPromocionTipo2(List<PromocionArticuloCompra> articulosCompraPromocion, Articulo articuloDeRegalo, Date inicio, Date fin) {
+        PromocionArticuloRegaloPorCompras promo = new PromocionArticuloRegaloPorCompras();
+        promo.setArticuloDeRegalo(articuloDeRegalo);
+        promo.setArticulosCompraPromocion(articulosCompraPromocion);
+        promo.setFechaInicio(inicio);
+        promo.setFechaFinal(fin);       
+        articulosCompraPromocion.forEach(articulo -> {
+            articulo.setPromocion(promo);
+        });
         repositoryT2.save(promo);
         return promo;
     }
