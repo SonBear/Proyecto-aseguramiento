@@ -11,9 +11,11 @@ import com.cherrysoft.model.data.Usuario;
 public class Main {
 
     public static void main(String[] args) {
+
         UsuarioRepository user = new UsuarioRepository();
         Usuario usuario = user.findById(1).get();
         InventarioControlador c = new InventarioControlador(usuario, null);
         c.abrirVentana();
+
     }
 }
