@@ -15,6 +15,7 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
+        //ConfiguracionSistema.realizarConfiguracion();
         //test
         Articulo articulo = new Articulo();
         articulo.setDescripcion("refresco sabor limon");

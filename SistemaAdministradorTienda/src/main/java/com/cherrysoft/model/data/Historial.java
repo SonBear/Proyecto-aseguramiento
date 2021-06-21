@@ -5,6 +5,7 @@
  */
 package com.cherrysoft.model.data;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,7 +25,7 @@ import org.hibernate.annotations.CreationTimestamp;
  */
 @Entity
 @Table(name = "bitacora_usuarios")
-public class Historial {
+public class Historial implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -82,11 +83,6 @@ public class Historial {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-
-    @Override
-    public String toString() {
-        return "Bitacora{" + "id=" + id + ", accion=" + accion + ", usuario=" + usuario.getNombre() + '}';
     }
 
 }

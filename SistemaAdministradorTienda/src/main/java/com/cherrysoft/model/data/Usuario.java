@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,9 +32,9 @@ public class Usuario {
     private String contrasenia;
 
     @Column
-    private String nombre;
+    private String usuario;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "rol_id")
     private Permiso permiso;
 
@@ -81,10 +82,6 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
     public Permiso getPermiso() {
         return permiso;
     }
@@ -107,6 +104,14 @@ public class Usuario {
 
     public void setTicketsGenerados(List<Ticket> ticketsGenerados) {
         this.ticketsGenerados = ticketsGenerados;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
 }
