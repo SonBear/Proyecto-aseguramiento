@@ -15,9 +15,9 @@ import com.cherrysoft.seguridad.VerificadorService;
  */
 public abstract class Controlador {
 
-    private Usuario usuario;
-    private Controlador controladorAnterior;
-    private final VerificadorService verificador = new VerificadorImp();
+    protected Usuario usuario;
+    protected Controlador controladorAnterior;
+    protected final VerificadorService verificador = new VerificadorImp();
 
     public abstract void abrirVentana();
 

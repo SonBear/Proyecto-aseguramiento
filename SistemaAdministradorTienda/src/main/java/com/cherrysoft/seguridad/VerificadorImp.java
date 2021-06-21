@@ -23,14 +23,14 @@ public class VerificadorImp implements VerificadorService {
     private final UsuarioRepository usuarioRepository = new UsuarioRepository();
 
     @Override
-    public void guardarAccionUsuario(Usuario usuario, String accion, boolean estaPermitido) {
+    public void guardarAccionUsuario(Usuario usuario, String accion) {
         List<Historial> bitacora = usuario.getBitacora();
         if (Objects.isNull(bitacora)) {
             bitacora = new ArrayList<>();
         }
         Historial historial = new Historial();
         historial.setAccion(accion);
-        historial.setFuePermitido(estaPermitido);
+        historial.setFuePermitido(true);
         historial.setUsuario(usuario);
         bitacora.add(historial);
         usuario.setBitacora(bitacora);
@@ -38,10 +38,8 @@ public class VerificadorImp implements VerificadorService {
     }
 
     @Override
-    public void bloquearASoloAdmin(Usuario usuario) throws Exception {
-        if (usuario.getPermiso().getRol() != Rol.ADMIN) {
-            throw new Exception("El usuario no tiene permitido esa accion");
-        }
+    public boolean esUsuarioAdmin(Usuario usuario) {
+        return usuario.getPermiso().getRol() == Rol.ADMIN;
     }
 
 }

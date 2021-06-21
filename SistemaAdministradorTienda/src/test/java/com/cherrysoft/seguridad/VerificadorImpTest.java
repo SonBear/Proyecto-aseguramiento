@@ -49,7 +49,7 @@ public class VerificadorImpTest {
         String accion = "registrar usuario";
         boolean estaPermitido = true;
         VerificadorImp instance = new VerificadorImp();
-        instance.guardarAccionUsuario(usuario, accion, estaPermitido);
+        instance.guardarAccionUsuario(usuario, accion);
         // TODO review the generated test code and remove the default call to fail.
     }
 
@@ -61,7 +61,7 @@ public class VerificadorImpTest {
         System.out.println("bloquearASoloAdmin");
         Usuario usuario = new UsuarioRepository().findById(3).get();
         VerificadorImp instance = new VerificadorImp();
-        instance.bloquearASoloAdmin(usuario);
+        assertTrue(instance.esUsuarioAdmin(usuario));
         // TODO review the generated test code and remove the default call to fail.
     }
 

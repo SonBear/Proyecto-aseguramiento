@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.persistence.EntityExistsException;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
@@ -29,6 +30,9 @@ public class InventarioImp implements InventarioService {
 
     @Override
     public Articulo registrarArticulo(Integer id, String nombre, String descripcion, BigDecimal precio, Integer catidad) {
+        if (existeArticuloConId(id)) {
+            throw new EntityExistsException();
+        }
         Articulo articulo = new Articulo();
         articulo.setId(id);
         articulo.setNombre(nombre);
@@ -134,6 +138,10 @@ public class InventarioImp implements InventarioService {
     private Articulo obtenerArticulo(Integer articuloId) throws Exception {
         return articuloRepository.findById(articuloId).orElseThrow(()
                 -> new Exception("No se ha encontrado el articulo con el id:" + articuloId));
+    }
+
+    private boolean existeArticuloConId(Integer id) {
+        return articuloRepository.findById(id).isPresent();
     }
 
     @Override

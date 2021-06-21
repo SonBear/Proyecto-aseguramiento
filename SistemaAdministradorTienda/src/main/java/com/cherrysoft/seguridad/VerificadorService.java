@@ -13,7 +13,7 @@ import com.cherrysoft.model.data.Usuario;
  */
 public interface VerificadorService {
 
-    public void bloquearASoloAdmin(Usuario usaurio) throws Exception;
+    public boolean esUsuarioAdmin(Usuario usuario);
 
-    public void guardarAccionUsuario(Usuario usuario, String accion, boolean estaPermitido);
+    public void guardarAccionUsuario(Usuario usuario, String accion);
 }

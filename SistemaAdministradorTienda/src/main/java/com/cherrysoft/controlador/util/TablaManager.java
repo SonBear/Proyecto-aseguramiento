@@ -7,8 +7,6 @@ package com.cherrysoft.controlador.util;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -35,7 +33,9 @@ public class TablaManager {
 
     public static void configurarTabla(JTable tabla, String[] headers) {
         DefaultTableModel model = new DefaultTableModel(headers, 0);
+
         tabla.setModel(model);
+
         tabla.repaint();
 
     }

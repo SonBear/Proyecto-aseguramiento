@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cherrysoft.controlador;
 
+import com.cherrysoft.controlador.util.DialogosUtil;
 import com.cherrysoft.controlador.util.TablaManager;
 import com.cherrysoft.interfaces.InventarioService;
 import com.cherrysoft.model.data.Articulo;
+import com.cherrysoft.model.data.Usuario;
 import com.cherrysoft.model.service.InventarioImp;
 import com.cherrysoft.vista.AgregarArticuloForm;
 import com.cherrysoft.vista.InventarioView;
@@ -15,15 +12,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.persistence.EntityExistsException;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
 
 /**
  *
@@ -33,13 +28,17 @@ public class InventarioControlador extends Controlador {
 
     private final InventarioView vista;
     private final AgregarArticuloForm agregarArticuloForm;
+    private final AgregarArticuloForm actualizarArticuloForm;
     private final InventarioService inventarioService;
     private Articulo articuloSeleccionado;
 
-    public InventarioControlador() {
+    public InventarioControlador(Usuario usuario, Controlador controladorAnterior) {
         this.vista = new InventarioView();
         this.inventarioService = new InventarioImp();
         this.agregarArticuloForm = new AgregarArticuloForm(vista);
+        this.actualizarArticuloForm = new AgregarArticuloForm(vista);
+        this.usuario = usuario;
+        this.controladorAnterior = controladorAnterior;
         configurarControlador();
 
     }
@@ -53,11 +52,13 @@ public class InventarioControlador extends Controlador {
 
     @Override
     public void cerrarVentana() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.vista.setVisible(false);
+        TablaManager.eliminarFilasTable(vista.getTablaArticulos());
     }
 
     @Override
     public void configurarControlador() {
+        vista.setLocationRelativeTo(null);
         vista.getTablaArticulos().addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -81,20 +82,40 @@ public class InventarioControlador extends Controlador {
             }
         });
         TablaManager.configurarTabla(vista.getTablaArticulos(), new String[]{"id", "nombre", "cantidad", "precio"});
-        vista.getBtnActualizarArticulo();
+
+        vista.getBtnActualizarArticulo().addActionListener(this::abrirActualizarForm);
         vista.getBtnAgregarArticulosCVS().addActionListener(this::agregarArticulosCSV);
-        vista.getBtnAñadirArticulo().addActionListener(this::agregarNuevoArticulo);
+        vista.getBtnAñadirArticulo().addActionListener(this::abrirAgregarForm);
         vista.getBtnEliminarArticulo().addActionListener(this::eliminarArticulo);
         vista.getBtnFiltrar().addActionListener(this::filtrarArticulos);
+        vista.getBtnRegresar().addActionListener((e) -> this.regresarControladorAnterior());
+        vista.getBtnBuscarArticuloEnProveedores().addActionListener(this::buscarEnProveedores);
 
+        if (!verificador.esUsuarioAdmin(usuario)) {
+            vista.getBtnActualizarArticulo().setEnabled(false);
+            vista.getBtnAgregarArticulosCVS().setEnabled(false);
+            vista.getBtnAñadirArticulo().setEnabled(false);
+            vista.getBtnEliminarArticulo().setEnabled(false);
+            vista.getBtnBuscarArticuloEnProveedores().setEnabled(false);
+        }
+        agregarArticuloForm.getBtnAceptar().addActionListener(this::agregarNuevoArticulo);
+        agregarArticuloForm.getBtnCancelar().addActionListener(this::cerrarAgregarForm);
+        agregarArticuloForm.getOperacionLabel().setText("\t Agregar nuevo articulo");
+        agregarArticuloForm.setLocationRelativeTo(vista);
+        actualizarArticuloForm.getBtnAceptar().addActionListener(this::actualizarArticulo);
+        actualizarArticuloForm.getBtnCancelar().addActionListener(this::cerrarActualizarForm);
+        actualizarArticuloForm.getOperacionLabel().setText("\t Actualizar articulo");
+        actualizarArticuloForm.getCantidadLabel().setText("Cantidad a aumentar: ");
+        actualizarArticuloForm.setLocationRelativeTo(vista);
     }
 
     @Override
     public void regresarControladorAnterior() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.cerrarVentana();
+        this.controladorAnterior.abrirVentana();
     }
 
-    public Articulo getArticuloSelectedTable() {
+    private Articulo getArticuloSelectedTable() {
 
         Object[] fila = TablaManager.obtenerFilaSeleccionada(vista.getTablaArticulos());
         if (Objects.isNull(fila)) {
@@ -139,38 +160,119 @@ public class InventarioControlador extends Controlador {
         try {
             JFileChooser fc = new JFileChooser();
             int result = fc.showDialog(vista, "Seleccionar");
-            File file = fc.getSelectedFile();
-            inventarioService.registrarArticulosPorCsv(file.getAbsolutePath());
-            actualizarTabla(inventarioService.obtenerArticulosDisponibles());
-        } catch (IOException ex) {
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File file = fc.getSelectedFile();
+                vista.getTxtRutaArchivo().setText(file.getAbsolutePath());
+                List<Articulo> articulos = inventarioService.registrarArticulosPorCsv(vista.getTxtRutaArchivo().getText());
+                actualizarTabla(inventarioService.obtenerArticulosDisponibles());
+                articulos.forEach((articulo) -> {
+                    verificador.guardarAccionUsuario(usuario, "Agrego o actualizo el articulo con el id: " + articulo.getId());
+                });
+            }
+
+        } catch (FileNotFoundException ex) {
+            DialogosUtil.mostrarDialogoDeError(vista, "No se ha encontrado el archivo especificado");
         } catch (NumberFormatException ex) {
+            DialogosUtil.mostrarDialogoDeError(vista, "Error en el formato de los numeros");
+        } catch (IOException ex) {
+            DialogosUtil.mostrarDialogoDeError(vista, "Error al encontrar la ruta del archivo");
+
+        } catch (IllegalArgumentException ex) {
+            DialogosUtil.mostrarDialogoDeError(vista, "El archivo no cumple con las especificacions csv");
         }
     }
 
     private void eliminarArticulo(ActionEvent e) {
         if (Objects.isNull(articuloSeleccionado)) {
-            JOptionPane.showMessageDialog(vista, "No se ha seleccionado un articulo", "ERROR", JOptionPane.ERROR_MESSAGE);
+            DialogosUtil.mostrarDialogoDeError(vista, "Error no se ha seleccionado un articulo");
+        } else if (DialogosUtil.mostrarDialogoDeConfirmacion(vista, "¿Desea eliminar el articulo?")) {
+            Articulo articulo = inventarioService.eliminarArticulo(articuloSeleccionado);
+            actualizarTabla(inventarioService.obtenerArticulosDisponibles());
+            verificador.guardarAccionUsuario(usuario, "Eliminar articulo con el id: " + articulo.getId());
         }
-        inventarioService.eliminarArticulo(articuloSeleccionado);
-        actualizarTabla(inventarioService.obtenerArticulosDisponibles());
+
     }
 
     private void agregarNuevoArticulo(ActionEvent e) {
-        agregarArticuloForm.setVisible(true);
-        agregarArticuloForm.getBtnAceptar().addActionListener((ev) -> {
+        try {
             Integer id = Integer.parseInt(agregarArticuloForm.getTxtCodigoBarras().getText());
             Integer cantidad = Integer.parseInt(agregarArticuloForm.getTxtCantidad().getText());
             String descripcion = agregarArticuloForm.getTxtDescripcion().getText();
             BigDecimal precio = BigDecimal.valueOf(Double.parseDouble(agregarArticuloForm.getTxtPrecio().getText()));
             String nombre = agregarArticuloForm.getTxtNombre().getText();
             inventarioService.registrarArticulo(id, nombre, descripcion, precio, cantidad);
-            agregarArticuloForm.setVisible(false);
             actualizarTabla(inventarioService.obtenerArticulosDisponibles());
-        });
+            verificador.guardarAccionUsuario(usuario, "Nuedo articulo con el id: " + id);
+            cerrarAgregarForm(e);
+        } catch (NumberFormatException ex) {
+            DialogosUtil.mostrarDialogoDeError(agregarArticuloForm, "Error en el formato de los numeros");
+        } catch (EntityExistsException ex) {
+            DialogosUtil.mostrarDialogoDeError(agregarArticuloForm, "El articulo con ese codigo ya se ha registrado");
+        }
 
-        agregarArticuloForm.getBtnCancelar().addActionListener((ev) -> {
-            agregarArticuloForm.setVisible(false);
-        });
     }
 
+    private void abrirAgregarForm(ActionEvent e) {
+        agregarArticuloForm.setVisible(true);
+    }
+
+    private void cerrarAgregarForm(ActionEvent e) {
+        agregarArticuloForm.getTxtCodigoBarras().setText("");
+        agregarArticuloForm.getTxtCantidad().setText("");
+        agregarArticuloForm.getTxtDescripcion().setText("");
+        agregarArticuloForm.getTxtPrecio().setText("");
+        agregarArticuloForm.getTxtNombre().setText("");
+        agregarArticuloForm.setVisible(false);
+    }
+
+    private void abrirActualizarForm(ActionEvent e) {
+        if (Objects.isNull(articuloSeleccionado)) {
+            DialogosUtil.mostrarDialogoDeError(vista, "No se ha seleccionado un articulo");
+        } else {
+            actualizarArticuloForm.getTxtCodigoBarras().setText(articuloSeleccionado.getId() + "");
+            actualizarArticuloForm.getTxtCantidad().setText(articuloSeleccionado.getCantidad() + "");
+            actualizarArticuloForm.getTxtDescripcion().setText(articuloSeleccionado.getDescripcion());
+            actualizarArticuloForm.getTxtPrecio().setText(articuloSeleccionado.getPrecio().toString());
+            actualizarArticuloForm.getTxtNombre().setText(articuloSeleccionado.getNombre());
+            actualizarArticuloForm.setVisible(true);
+        }
+
+    }
+
+    private void cerrarActualizarForm(ActionEvent e) {
+        actualizarArticuloForm.getTxtCodigoBarras().setText("");
+        actualizarArticuloForm.getTxtCantidad().setText("");
+        actualizarArticuloForm.getTxtDescripcion().setText("");
+        actualizarArticuloForm.getTxtPrecio().setText("");
+        actualizarArticuloForm.getTxtNombre().setText("");
+        actualizarArticuloForm.setVisible(false);
+    }
+
+    private void actualizarArticulo(ActionEvent e) {
+
+        try {
+            Integer id = Integer.parseInt(actualizarArticuloForm.getTxtCodigoBarras().getText());
+            Integer cantidad = Integer.parseInt(actualizarArticuloForm.getTxtCantidad().getText());
+            String descripcion = actualizarArticuloForm.getTxtDescripcion().getText();
+            BigDecimal precio = BigDecimal.valueOf(Double.parseDouble(actualizarArticuloForm.getTxtPrecio().getText()));
+            String nombre = actualizarArticuloForm.getTxtNombre().getText();
+
+            articuloSeleccionado.setCantidad(articuloSeleccionado.getCantidad() + cantidad);
+            articuloSeleccionado.setDescripcion(descripcion);
+            articuloSeleccionado.setId(id);
+            articuloSeleccionado.setNombre(nombre);
+            articuloSeleccionado.setPrecio(precio);
+
+            inventarioService.actualizarArticulo(articuloSeleccionado);
+            actualizarTabla(inventarioService.obtenerArticulosDisponibles());
+            verificador.guardarAccionUsuario(usuario, "Actualizar articulo con id: " + id);
+            cerrarActualizarForm(e);
+        } catch (NumberFormatException ex) {
+            DialogosUtil.mostrarDialogoDeError(vista, "Error en el formato de los numeros");
+        }
+    }
+
+    private void buscarEnProveedores(ActionEvent e) {
+        System.out.println("Por implementar");
+    }
 }
