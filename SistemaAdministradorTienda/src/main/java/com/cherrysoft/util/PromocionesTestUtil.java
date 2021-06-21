@@ -12,6 +12,7 @@ import com.cherrysoft.model.data.PromocionArticuloCompra;
 import com.cherrysoft.model.data.PromocionArticuloRegaloPorCompras;
 import com.cherrysoft.model.data.PromocionDescuentoArticuloCantidad;
 import com.cherrysoft.model.data.PromocionDescuentoArticuloPorCompras;
+import com.cherrysoft.model.data.PromocionGeneralArticulos;
 import com.cherrysoft.model.repository.ArticuloRepository;
 import com.cherrysoft.model.repository.CrudRepository;
 import com.github.javafaker.Faker;
@@ -64,6 +65,13 @@ public class PromocionesTestUtil {
         promo.setFechaInicio(crearFecha("2021-06-15"));
         promo.setFechaFinal(crearFecha("2021-07-20"));
         return promo;        
+    }
+    
+    public PromocionGeneralArticulos crearPromocionTipo4() {
+        PromocionGeneralArticulos promo = new PromocionGeneralArticulos(0.25);
+        promo.setFechaInicio(crearFecha("2021-06-15"));
+        promo.setFechaFinal(crearFecha("2021-07-20"));
+        return promo;
     }
     
     public Articulo crearArticulo() {
