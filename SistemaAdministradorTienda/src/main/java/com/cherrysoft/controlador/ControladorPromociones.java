@@ -27,7 +27,6 @@ import javax.swing.JPanel;
  * @author Equipo1
  */
 public class ControladorPromociones {
-    private PanelPromocionTipo1 panelTipo1;
     private ControladorPanelPromocionTipo1 promocionT1;
     private PanelPromocionTipo2 panelTipo2;
     private PanelPromocionTipo3 panelTipo3;
