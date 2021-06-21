@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class PromocionArticuloRegaloPorComprasRepositoryTest {
     private static PromocionArticuloRegaloPorComprasRepository promocionTipo2Repository;
-    private PromocionesTestUtil utilidades;
+    private static PromocionesTestUtil utilidades;
     private ArticuloRepository articulosRepository;
     
     
@@ -46,10 +46,12 @@ public class PromocionArticuloRegaloPorComprasRepositoryTest {
     
     @BeforeAll
     public static void setUpClass() {
+        utilidades.borrarTodasLasPromociones(promocionTipo2Repository);        
     }
     
     @AfterAll
     public static void tearDownClass() {
+        utilidades.borrarTodasLasPromociones(promocionTipo2Repository);
     }
     
     @BeforeEach
@@ -68,12 +70,12 @@ public class PromocionArticuloRegaloPorComprasRepositoryTest {
     @Test
     public void testFindAll() {
         System.out.println("Ejecutando prueba listar promociones tipo 2");
-        utilidades.borrarTodasLasPromociones();     
+        utilidades.borrarTodasLasPromociones(promocionTipo2Repository);     
 
         List<PromocionArticuloRegaloPorCompras> promocionesEsperadas = new ArrayList<>();
-        promocionesEsperadas.add(utilidades.crearPromocion());
-        promocionesEsperadas.add(utilidades.crearPromocion());
-        promocionesEsperadas.add(utilidades.crearPromocion());
+        promocionesEsperadas.add(utilidades.crearPromocionTipo2());
+        promocionesEsperadas.add(utilidades.crearPromocionTipo2());
+        promocionesEsperadas.add(utilidades.crearPromocionTipo2());
 
         promocionesEsperadas.forEach(promo -> promocionTipo2Repository.save(promo));
 
@@ -86,9 +88,9 @@ public class PromocionArticuloRegaloPorComprasRepositoryTest {
     @Test
     public void testfindById() {
         System.out.println("Ejecutando prueba buscar promocion tipo 2 por ID");
-        utilidades.borrarTodasLasPromociones();             
+        utilidades.borrarTodasLasPromociones(promocionTipo2Repository);             
         
-        PromocionArticuloRegaloPorCompras promocionEsperada = utilidades.crearPromocion();
+        PromocionArticuloRegaloPorCompras promocionEsperada = utilidades.crearPromocionTipo2();
         promocionTipo2Repository.save(promocionEsperada);
 
         Optional<PromocionArticuloRegaloPorCompras> promocionActual = promocionTipo2Repository.findById(promocionEsperada.getId());
@@ -98,9 +100,9 @@ public class PromocionArticuloRegaloPorComprasRepositoryTest {
     @Test
     public void testSave() {
         System.out.println("Ejecutando prueba guardar una promocion tipo 2...");
-        utilidades.borrarTodasLasPromociones();             
+        utilidades.borrarTodasLasPromociones(promocionTipo2Repository);             
         
-        PromocionArticuloRegaloPorCompras promocionEsperada = utilidades.crearPromocion();
+        PromocionArticuloRegaloPorCompras promocionEsperada = utilidades.crearPromocionTipo2();
         promocionTipo2Repository.save(promocionEsperada);
         Optional<PromocionArticuloRegaloPorCompras> promocionActual = promocionTipo2Repository.findById(promocionEsperada.getId());        
 
@@ -110,12 +112,12 @@ public class PromocionArticuloRegaloPorComprasRepositoryTest {
     @Test
     public void testDelete() {
         System.out.println("Ejecutando prueba borrar una promocion tipo 2 de la bd");    
-        utilidades.borrarTodasLasPromociones();        
+        utilidades.borrarTodasLasPromociones(promocionTipo2Repository);        
 
         List<PromocionArticuloRegaloPorCompras> promocionesEsperadas = new ArrayList<>();
-        promocionesEsperadas.add(utilidades.crearPromocion());
-        promocionesEsperadas.add(utilidades.crearPromocion());
-        promocionesEsperadas.add(utilidades.crearPromocion());
+        promocionesEsperadas.add(utilidades.crearPromocionTipo2());
+        promocionesEsperadas.add(utilidades.crearPromocionTipo2());
+        promocionesEsperadas.add(utilidades.crearPromocionTipo2());
 
         promocionesEsperadas.forEach(promo -> promocionTipo2Repository.save(promo));        
 
@@ -131,7 +133,7 @@ public class PromocionArticuloRegaloPorComprasRepositoryTest {
     public void testDeleteById() {
         System.out.println("Ejecutando prueba eliminar promocion tipo 2 por Id...");
         
-        PromocionArticuloRegaloPorCompras promocion = utilidades.crearPromocion();
+        PromocionArticuloRegaloPorCompras promocion = utilidades.crearPromocionTipo2();
         promocionTipo2Repository.save(promocion);
         
         final int ID_ELIMINAR = promocion.getId();
@@ -145,7 +147,7 @@ public class PromocionArticuloRegaloPorComprasRepositoryTest {
     public void testUpdate() {
         System.out.println("Ejecutando prueba actualizar una promocion tipo 2...");
 
-        PromocionArticuloRegaloPorCompras promocion = utilidades.crearPromocion();
+        PromocionArticuloRegaloPorCompras promocion = utilidades.crearPromocionTipo2();
         promocionTipo2Repository.save(promocion);
         
         PromocionArticuloCompra promoArticulo = new PromocionArticuloCompra();         

@@ -35,6 +35,9 @@ public class PromocionDescuentoArticuloCantidad extends Promocion {
         this.articulo = articulo;
     }
 
+    public PromocionDescuentoArticuloCantidad() {
+    }
+
     public Integer getCantidad() {
         return cantidad;
     }

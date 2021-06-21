@@ -7,9 +7,12 @@ package com.cherrysoft.util;
 
 import com.cherrysoft.controlador.ControladorPromociones;
 import com.cherrysoft.model.data.Articulo;
+import com.cherrysoft.model.data.Promocion;
 import com.cherrysoft.model.data.PromocionArticuloCompra;
 import com.cherrysoft.model.data.PromocionArticuloRegaloPorCompras;
+import com.cherrysoft.model.data.PromocionDescuentoArticuloCantidad;
 import com.cherrysoft.model.repository.ArticuloRepository;
+import com.cherrysoft.model.repository.CrudRepository;
 import com.cherrysoft.model.repository.PromocionArticuloRegaloPorComprasRepository;
 import com.github.javafaker.Faker;
 import java.math.BigDecimal;
@@ -30,18 +33,24 @@ public class PromocionesTestUtil {
     private final Faker faker = new Faker();
     private final int NUM_ARTICULOS = 5;    
     private ArticuloRepository articulosRepository;
-    private PromocionArticuloRegaloPorComprasRepository promocionTipo2Repository;
     
     public PromocionesTestUtil() {
-        promocionTipo2Repository = new PromocionArticuloRegaloPorComprasRepository();        
         articulosRepository = new ArticuloRepository();            
     }    
     
-    public PromocionArticuloRegaloPorCompras crearPromocion() {        
+    public PromocionDescuentoArticuloCantidad crearPromocionTipo1() {
+        PromocionDescuentoArticuloCantidad promo = new PromocionDescuentoArticuloCantidad();
+        promo.setArticulo(getArticuloAleatorio());
+        promo.setCantidad(1);
+        promo.setDescuento(0.2);
+        promo.setFechaInicio(crearFecha("2021-06-15"));
+        promo.setFechaFinal(crearFecha("2021-07-20"));
+        return promo;
+    }
+    
+    public PromocionArticuloRegaloPorCompras crearPromocionTipo2() {        
         PromocionArticuloRegaloPorCompras promo = new PromocionArticuloRegaloPorCompras();
         promo.setArticuloDeRegalo(getArticuloAleatorio());
-        System.out.println("Articulo : ");
-        System.out.println(promo.getArticuloDeRegalo());
         promo.setArticulosCompraPromocion(crearArticulosPromocion(promo));
         promo.setFechaInicio(crearFecha("2021-06-15"));
         promo.setFechaFinal(crearFecha("2021-07-20"));
@@ -76,14 +85,14 @@ public class PromocionesTestUtil {
         return articulosRepository.findById(idAleatorio).get();
     }
     
-    public List<PromocionArticuloCompra> crearArticulosPromocion(PromocionArticuloRegaloPorCompras promo) {
+    public List<PromocionArticuloCompra> crearArticulosPromocion(Promocion promo) {
         List<PromocionArticuloCompra> promoArticulos = new ArrayList();
         PromocionArticuloCompra promoArticulo1 = new PromocionArticuloCompra(); 
-        promoArticulo1.setArticulo(getArticuloAleatorio(promo.getArticuloDeRegalo()));
+        promoArticulo1.setArticulo(getArticuloAleatorio());
         promoArticulo1.setPromocion(promo);
         
         PromocionArticuloCompra promoArticulo2 = new PromocionArticuloCompra(); 
-        promoArticulo2.setArticulo(getArticuloAleatorio(promo.getArticuloDeRegalo()));  
+        promoArticulo2.setArticulo(getArticuloAleatorio());  
         promoArticulo2.setPromocion(promo);
         
         promoArticulos.add(promoArticulo1);
@@ -102,10 +111,10 @@ public class PromocionesTestUtil {
         return parsedDate;            
     }
     
-    public void borrarTodasLasPromociones() {
-        Iterable<PromocionArticuloRegaloPorCompras> promocionesActuales = promocionTipo2Repository.findAll();
+    public void borrarTodasLasPromociones(CrudRepository repository) {
+        Iterable<Promocion> promocionesActuales = repository.findAll();
         promocionesActuales.forEach(promo -> {
-            promocionTipo2Repository.delete(promo);
+            repository.delete(promo);
         });
     }    
     
