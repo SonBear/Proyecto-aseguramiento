@@ -22,6 +22,23 @@ public class InventarioImp implements InventarioService {
 
     private final ArticuloRepository articuloRepository = new ArticuloRepository();
 
+    @Override
+    public Articulo obtenerArticuloPorId(Integer id) throws Exception {
+        return articuloRepository.findById(id).orElseThrow(() -> new Exception("Articulo no encontrado"));
+    }
+
+    @Override
+    public Articulo registrarArticulo(Integer id, String nombre, String descripcion, BigDecimal precio, Integer catidad) {
+        Articulo articulo = new Articulo();
+        articulo.setId(id);
+        articulo.setNombre(nombre);
+        articulo.setCantidad(catidad);
+        articulo.setDescripcion(descripcion);
+        articulo.setPrecio(precio);
+        articuloRepository.save(articulo);
+        return articulo;
+    }
+
     private enum CabecerasCsv {
         id, cantidad, precio, nombre, descripcion
     }
@@ -102,6 +119,7 @@ public class InventarioImp implements InventarioService {
                 articulo.setDescripcion(descripcion);
                 articulo.setNombre(nombre);
                 articulo.setPrecio(precio);
+                articulo.setId(id);
             }
             articuloRepository.save(articulo);
             articulos.add(articulo);

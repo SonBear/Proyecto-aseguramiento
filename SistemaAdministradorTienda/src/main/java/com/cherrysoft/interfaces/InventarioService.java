@@ -8,6 +8,7 @@ package com.cherrysoft.interfaces;
 import com.cherrysoft.model.data.Articulo;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -29,4 +30,8 @@ public interface InventarioService {
     public List<Articulo> obtenerArticulosPorRangoCantidad(Integer inferior, Integer superior);
 
     public List<Articulo> registrarArticulosPorCsv(String rutaArchivo) throws FileNotFoundException, IOException, NumberFormatException;
+
+    public Articulo registrarArticulo(Integer id, String nombre, String descripcion, BigDecimal precio, Integer catidad);
+
+    public Articulo obtenerArticuloPorId(Integer id) throws Exception;
 }

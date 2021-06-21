@@ -6,6 +6,8 @@
 package com.cherrysoft.controlador;
 
 import com.cherrysoft.model.data.Usuario;
+import com.cherrysoft.seguridad.VerificadorImp;
+import com.cherrysoft.seguridad.VerificadorService;
 
 /**
  *
@@ -15,4 +17,13 @@ public abstract class Controlador {
 
     private Usuario usuario;
     private Controlador controladorAnterior;
+    private final VerificadorService verificador = new VerificadorImp();
+
+    public abstract void abrirVentana();
+
+    public abstract void cerrarVentana();
+
+    public abstract void configurarControlador();
+
+    public abstract void regresarControladorAnterior();
 }

@@ -1,5 +1,6 @@
 package com.cherrysoft;
 
+import com.cherrysoft.controlador.InventarioControlador;
 import com.cherrysoft.model.repository.UsuarioRepository;
 
 /**
@@ -10,8 +11,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        UsuarioRepository us = new UsuarioRepository();
-        System.out.println(us.findById(1).get().getNombre());
-
+        InventarioControlador c = new InventarioControlador();
+        c.abrirVentana();
     }
 }
