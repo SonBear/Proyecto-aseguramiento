@@ -183,6 +183,14 @@ public class PanelPromocionTipo1 extends javax.swing.JPanel {
         return txtDescuento;
     }
 
+    public void setComboArticuloAComprar(JComboBox<String> comboArticuloAComprar) {
+        this.comboArticuloAComprar = comboArticuloAComprar;
+    }
+
+    public void setComboClientes(JComboBox<String> comboClientes) {
+        this.comboClientes = comboClientes;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarCliente;
