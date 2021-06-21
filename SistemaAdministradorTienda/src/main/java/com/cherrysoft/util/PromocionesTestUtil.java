@@ -11,9 +11,9 @@ import com.cherrysoft.model.data.Promocion;
 import com.cherrysoft.model.data.PromocionArticuloCompra;
 import com.cherrysoft.model.data.PromocionArticuloRegaloPorCompras;
 import com.cherrysoft.model.data.PromocionDescuentoArticuloCantidad;
+import com.cherrysoft.model.data.PromocionDescuentoArticuloPorCompras;
 import com.cherrysoft.model.repository.ArticuloRepository;
 import com.cherrysoft.model.repository.CrudRepository;
-import com.cherrysoft.model.repository.PromocionArticuloRegaloPorComprasRepository;
 import com.github.javafaker.Faker;
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -56,6 +56,15 @@ public class PromocionesTestUtil {
         promo.setFechaFinal(crearFecha("2021-07-20"));
         return promo;
     }    
+    
+    public PromocionDescuentoArticuloPorCompras crearPromocionTipo3() {
+        PromocionDescuentoArticuloPorCompras promo = new PromocionDescuentoArticuloPorCompras();
+        promo.setDescuento(0.15);
+        promo.setArticulosCompraPromocion(crearArticulosPromocion(promo));
+        promo.setFechaInicio(crearFecha("2021-06-15"));
+        promo.setFechaFinal(crearFecha("2021-07-20"));
+        return promo;        
+    }
     
     public Articulo crearArticulo() {
         Articulo articulo = new Articulo();
