@@ -7,7 +7,6 @@ package com.cherrysoft.controlador;
 
 import com.cherrysoft.model.service.ServicioPromocionesImp;
 import com.cherrysoft.util.EnumTiposDePromociones;
-import com.cherrysoft.vistas.PanelPromocionTipo1;
 import com.cherrysoft.vistas.PanelPromocionTipo2;
 import com.cherrysoft.vistas.PanelPromocionTipo3;
 import com.cherrysoft.vistas.PanelPromocionTipo4;
@@ -51,24 +50,44 @@ public class ControladorPromociones {
         
         this.vista.getComboTipoPromocion().setModel(new DefaultComboBoxModel(EnumTiposDePromociones.values()));
         this.vista.getBtnCrearPromocion().addActionListener(this::actionCrearPromocion);
+        this.vista.getComboTipoPromocion().addActionListener(this::cambiarTipoDePromocion);
+    }
+    
+    private void cambiarTipoDePromocion(ActionEvent e) {
+        switch(getTipoDePromocionActiva()) {
+            case Tipo1:
+                loadPanel(promocionT1.getPanel());
+                break;
+            case Tipo2:
+                loadPanel(panelTipo2);
+                break;
+             case Tipo3:
+                loadPanel(panelTipo3);
+                break;
+            case Tipo4:
+                loadPanel(panelTipo4);
+                break;                
+        }
     }
     
     private void actionCrearPromocion(ActionEvent e) {
-        EnumTiposDePromociones promocionActiva = (EnumTiposDePromociones) vista.getComboTipoPromocion().getSelectedItem();
         Date inicio = parseDate("2021-06-15");
         Date fin = parseDate("2021-07-15");        
-        if(promocionActiva == EnumTiposDePromociones.Tipo1) {
-            promocionT1.crearPromocion(inicio, fin);
-        }
-        else if(promocionActiva == EnumTiposDePromociones.Tipo2) {
-            System.out.println("Promocion TIPO 2");
-        }
-        else if(promocionActiva == EnumTiposDePromociones.Tipo3) {
-            System.out.println("Promocion TIPO 3");
-        }
-        else if(promocionActiva == EnumTiposDePromociones.Tipo4) {
-            System.out.println("Promocion TIPO 4");            
-        }
+        
+        switch(getTipoDePromocionActiva()) {
+            case Tipo1:
+                promocionT1.crearPromocion(inicio, fin);
+                break;
+            case Tipo2:
+                System.out.println("Promocion TIPO 2");
+                break;
+             case Tipo3:
+                System.out.println("Promocion TIPO 3");
+                break;
+            case Tipo4:
+                System.out.println("Promocion TIPO 4");
+                break;                
+        }        
     }    
     
     private Date parseDate(String date) {
@@ -80,6 +99,11 @@ public class ControladorPromociones {
             Logger.getLogger(ControladorPromociones.class.getName()).log(Level.SEVERE, null, ex);
         }
         return parsedDate;    
+    }
+    
+    private EnumTiposDePromociones getTipoDePromocionActiva() {
+        EnumTiposDePromociones promocionActiva = (EnumTiposDePromociones) vista.getComboTipoPromocion().getSelectedItem();
+        return promocionActiva;
     }
     
     private void loadPanel(JPanel panel) {
