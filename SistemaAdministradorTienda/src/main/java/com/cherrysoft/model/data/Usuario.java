@@ -30,7 +30,7 @@ public class Usuario {
     @Column
     private String contrasenia;
 
-    @Column
+    @Column(name = "usuario")
     private String nombre;
 
     @OneToOne
