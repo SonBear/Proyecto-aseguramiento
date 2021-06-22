@@ -34,6 +34,7 @@ public class PromocionesTestUtil {
     private final Faker faker = new Faker();
     private final int NUM_ARTICULOS = 5;    
     private ArticuloRepository articulosRepository;
+    private static int idArticulos = 1000;
     
     public PromocionesTestUtil() {
         articulosRepository = new ArticuloRepository();            
@@ -76,7 +77,8 @@ public class PromocionesTestUtil {
     
     public Articulo crearArticulo() {
         Articulo articulo = new Articulo();
-        articulo.setId(faker.number().numberBetween(1, 1000));
+        //articulo.setId(faker.number().numberBetween(1, 1000));
+        articulo.setId(++idArticulos);
         articulo.setNombre(faker.food().fruit());
         articulo.setDescripcion("Descripcion: " + faker.number().digits(3));
         articulo.setPrecio(BigDecimal.valueOf(faker.number().numberBetween(5, 100)));

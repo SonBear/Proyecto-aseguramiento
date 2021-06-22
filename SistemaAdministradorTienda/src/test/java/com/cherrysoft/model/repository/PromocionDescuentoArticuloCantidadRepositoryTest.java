@@ -40,19 +40,20 @@ public class PromocionDescuentoArticuloCantidadRepositoryTest {
     
     @AfterAll
     public static void tearDownClass() {
-        if (promocionTipo1Repository != null) {
-            promocionTipo1Repository.getEntityManager().close();
-        }
-        System.out.println("Promocion tipo1 repository cerrado");         
+        
     }    
     
     @BeforeEach
     public void setUp() {
+        promocionTipo1Repository = new PromocionDescuentoArticuloCantidadRepository();                        
     }
     
     @AfterEach
     public void tearDown() {
-     
+        if (promocionTipo1Repository != null) {
+            //promocionTipo1Repository.getEntityManager().close();
+        }
+        System.out.println("Promocion tipo1 repository cerrado");      
     }
 
     @Test

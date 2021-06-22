@@ -44,7 +44,7 @@ public class PromocionArticuloRegaloPorComprasRepositoryTest {
     @AfterAll
     public static void tearDownClass() {
         if (promocionTipo2Repository != null) {
-            promocionTipo2Repository.getEntityManager().close();
+            //promocionTipo2Repository.getEntityManager().close();
         }
         System.out.println("Promocion tipo2 repository cerrado");       
     }

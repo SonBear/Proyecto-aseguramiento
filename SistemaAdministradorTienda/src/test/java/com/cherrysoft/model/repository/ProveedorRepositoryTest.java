@@ -29,7 +29,7 @@ public class ProveedorRepositoryTest {
     @AfterAll
     public static void tearDown() {
         if (proveedorRepository != null) {
-            proveedorRepository.getEntityManager().close();
+            //proveedorRepository.getEntityManager().close();
         }
         System.out.println("Proveedor repository cerrado");
     }

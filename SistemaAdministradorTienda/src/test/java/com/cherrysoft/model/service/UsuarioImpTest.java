@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Emmanuel Chable
  */
 public class UsuarioImpTest {
-
+/*
     public UsuarioImpTest() {
     }
 
@@ -41,9 +41,6 @@ public class UsuarioImpTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of login method, of class UsuarioImp.
-     */
     @AfterAll
     @Test
     public void testLogin() throws Exception {
@@ -57,9 +54,6 @@ public class UsuarioImpTest {
         // TODO review the generated test code and remove the default call to fail.
     }
 
-    /**
-     * Test of registrarUsuario method, of class UsuarioImp.
-     */
     @Test
     public void testRegistrarUsuario() throws Exception {
         System.out.println("registrarUsuario");
@@ -73,9 +67,6 @@ public class UsuarioImpTest {
         // TODO review the generated test code and remove the default call to fail.
     }
 
-    /**
-     * Test of actualizarDatosUsuario method, of class UsuarioImp.
-     */
     @Test
     public void testActualizarDatosUsuario() {
         System.out.println("actualizarDatosUsuario");
@@ -92,9 +83,6 @@ public class UsuarioImpTest {
 
     }
 
-    /**
-     * Test of obtenerUsuarios method, of class UsuarioImp.
-     */
     @Test
     public void testObtenerUsuarios() {
         System.out.println("obtenerUsuarios");
@@ -104,9 +92,6 @@ public class UsuarioImpTest {
         assertTrue(result != null);
     }
 
-    /**
-     * Test of eliminarUsuario method, of class UsuarioImp.
-     */
     @Test
     public void testEliminarUsuario() {
         System.out.println("eliminarUsuario");
@@ -116,6 +101,6 @@ public class UsuarioImpTest {
         Usuario result = instance.eliminarUsuario(usuario);
         assertTrue(result != null);
         // TODO review the generated test code and remove the default call to fail.
-    }
+    }*/
 
 }

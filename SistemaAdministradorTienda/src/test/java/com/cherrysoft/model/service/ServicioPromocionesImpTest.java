@@ -33,6 +33,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Equipo1
  */
 public class ServicioPromocionesImpTest {
+    
     private ServicioPromocionesImp servicio;
     private static PromocionesTestUtil utilidades;
     private ArticuloRepository articulosRepository;   
@@ -67,9 +68,6 @@ public class ServicioPromocionesImpTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of crearPromocionTipo1 method, of class ServicioPromocionesImp.
-     */
     @Test
     public void testCrearPromocionTipo1() {
         System.out.println("Ejecutando prueba crear promocion tipo 1");
