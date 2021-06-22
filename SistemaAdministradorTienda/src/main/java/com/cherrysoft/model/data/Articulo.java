@@ -124,4 +124,9 @@ public class Articulo implements Serializable {
         this.ventasArticulos = ventasArticulos;
     }
 
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
+
 }

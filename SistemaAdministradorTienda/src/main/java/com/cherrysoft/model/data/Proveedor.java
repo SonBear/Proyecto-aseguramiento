@@ -6,6 +6,7 @@
 package com.cherrysoft.model.data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -41,7 +42,7 @@ public class Proveedor implements Serializable {
     private String direccion;
 
     @OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL)
-    private List<ArticuloProveedor> proveedorArticulos;
+    private List<ArticuloProveedor> proveedorArticulos = new ArrayList();
 
     public Integer getId() {
         return id;
@@ -89,6 +90,10 @@ public class Proveedor implements Serializable {
 
     public void setProveedorArticulos(List<ArticuloProveedor> proveedorArticulos) {
         this.proveedorArticulos = proveedorArticulos;
+    }
+    
+    public void agregarArticulo(ArticuloProveedor art) {
+        this.proveedorArticulos.add(art);
     }
 
 }
