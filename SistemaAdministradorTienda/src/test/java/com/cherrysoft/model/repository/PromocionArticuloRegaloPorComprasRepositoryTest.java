@@ -29,34 +29,33 @@ public class PromocionArticuloRegaloPorComprasRepositoryTest {
     private ArticuloRepository articulosRepository;
     
     
-    public PromocionArticuloRegaloPorComprasRepositoryTest() {
-        utilidades = new PromocionesTestUtil();
-        utilidades.iniciarArticulos();
-        promocionTipo2Repository = new PromocionArticuloRegaloPorComprasRepository();        
+    public PromocionArticuloRegaloPorComprasRepositoryTest() {      
         articulosRepository = new ArticuloRepository();    
     }
     
     @BeforeAll
     public static void setUpClass() {
-        utilidades.borrarTodasLasPromociones(promocionTipo2Repository);        
+        promocionTipo2Repository = new PromocionArticuloRegaloPorComprasRepository();                
+        utilidades = new PromocionesTestUtil();        
+        utilidades.borrarTodasLasPromociones(promocionTipo2Repository); 
+        utilidades.iniciarArticulos();        
     }
     
     @AfterAll
     public static void tearDownClass() {
-        utilidades.borrarTodasLasPromociones(promocionTipo2Repository);
+        if (promocionTipo2Repository != null) {
+            promocionTipo2Repository.getEntityManager().close();
+        }
+        System.out.println("Promocion tipo2 repository cerrado");       
     }
     
     @BeforeEach
     public void setUp() {
-        promocionTipo2Repository = new PromocionArticuloRegaloPorComprasRepository(); 
     }
     
     @AfterEach
     public void tearDown() {
-        if (promocionTipo2Repository != null) {
-            promocionTipo2Repository.getEntityManager().close();
-        }
-        System.out.println("Promocion tipo2 repository cerrado");        
+     
     }
 
     @Test
