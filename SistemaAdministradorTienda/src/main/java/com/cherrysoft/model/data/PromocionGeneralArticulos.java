@@ -25,6 +25,9 @@ public class PromocionGeneralArticulos extends Promocion implements Serializable
         this.descuento = descuento;
     }
 
+    public PromocionGeneralArticulos() {
+    }
+
     public Double getDescuento() {
         return descuento;
     }
