@@ -47,7 +47,7 @@ public class ConfiguracionSistema {
 
     private static boolean estanLosPermisosAgregados() {
         List<Permiso> permisos = obtenerPermisos();
-        return !permisos.isEmpty();
+        return permisos.size() > 2;
     }
 
     private static List<Permiso> obtenerPermisos() {

@@ -34,7 +34,7 @@ public class Usuario {
     @Column
     private String usuario;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "rol_id")
     private Permiso permiso;
 

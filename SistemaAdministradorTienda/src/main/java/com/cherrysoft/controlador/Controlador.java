@@ -35,5 +35,8 @@ public abstract class Controlador {
 
     public abstract void configurarControlador();
 
-    public abstract void regresarControladorAnterior();
+    public void regresarControladorAnterior() {
+        this.cerrarVentana();
+        controladorAnterior.abrirVentana();
+    }
 }

@@ -56,8 +56,9 @@ public class UsuarioImp implements UsuarioService {
     }
 
     @Override
-    public Usuario actualizarDatosUsuario(Usuario usr, String usuario, String email, String password, Permiso permiso) {
+    public Usuario actualizarDatosUsuario(Usuario usr, String usuario, String email, String password, Rol rol) {
         usr.setCorreo(email);
+        Permiso permiso = getPermisoConRol(rol);
         usr.setPermiso(permiso);
         usr.setUsuario(usuario);
         String pass = Encriptador.encriptarContrasenia(password);
@@ -83,6 +84,11 @@ public class UsuarioImp implements UsuarioService {
                 .stream(permisoRepository.findAll().spliterator(), true)
                 .filter((e) -> e.getRol().equals(rol))
                 .findFirst().orElse(null);
+    }
+
+    @Override
+    public Usuario obtenerUsuarioPorId(Integer id) throws Exception {
+        return usuarioRepository.findById(id).orElseThrow(() -> new Exception("No existe el usuario con el id: " + id));
     }
 
 }

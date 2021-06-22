@@ -58,29 +58,9 @@ public class InventarioControlador extends Controlador {
     @Override
     public void configurarControlador() {
         vista.setLocationRelativeTo(null);
-        vista.getTablaArticulos().addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                hacerClickTabla();
-            }
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-        });
         TablaManager.configurarTabla(vista.getTablaArticulos(), new String[]{"id", "nombre", "cantidad", "precio"});
+        TablaManager.establecerEventoClick(vista.getTablaArticulos(), this::hacerClickTabla);
 
         vista.getBtnActualizarArticulo().addActionListener(this::abrirActualizarForm);
         vista.getBtnAgregarArticulosCVS().addActionListener(this::agregarArticulosCSV);
@@ -108,12 +88,6 @@ public class InventarioControlador extends Controlador {
         actualizarArticuloForm.setLocationRelativeTo(vista);
     }
 
-    @Override
-    public void regresarControladorAnterior() {
-        this.cerrarVentana();
-        this.controladorAnterior.abrirVentana();
-    }
-
     private Articulo getArticuloSelectedTable() {
 
         Object[] fila = TablaManager.obtenerFilaSeleccionada(vista.getTablaArticulos());
@@ -130,12 +104,14 @@ public class InventarioControlador extends Controlador {
         return null;
     }
 
-    private void hacerClickTabla() {
+    private void hacerClickTabla(MouseEvent event) {
         this.articuloSeleccionado = getArticuloSelectedTable();
-        vista.getNombreArticuloLabel().setText("nombre: " + articuloSeleccionado.getNombre());
-        vista.getPrecioArticuloLabel().setText("precio: " + articuloSeleccionado.getPrecio().toString());
-        vista.getIdArticuloLabel().setText("id: " + articuloSeleccionado.getId());
-        vista.getCantidadArticuloLabel().setText("cantidad: " + articuloSeleccionado.getCantidad());
+        if (!Objects.isNull(this.articuloSeleccionado)) {
+            vista.getNombreArticuloLabel().setText("nombre: " + articuloSeleccionado.getNombre());
+            vista.getPrecioArticuloLabel().setText("precio: " + articuloSeleccionado.getPrecio().toString());
+            vista.getIdArticuloLabel().setText("id: " + articuloSeleccionado.getId());
+            vista.getCantidadArticuloLabel().setText("cantidad: " + articuloSeleccionado.getCantidad());
+        }
     }
 
     private void actualizarTabla(List<Articulo> articulos) {

@@ -87,7 +87,7 @@ public class UsuarioImpTest {
         UsuarioImp instance = new UsuarioImp();
         Usuario usr = instance.obtenerUsuarios().get(0);
         Usuario expResult = null;
-        Usuario result = instance.actualizarDatosUsuario(usr, usuario, email, password, permiso);
+        Usuario result = instance.actualizarDatosUsuario(usr, usuario, email, password, Rol.ADMIN);
         assertTrue(true);
 
     }
