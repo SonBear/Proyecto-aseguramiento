@@ -21,6 +21,7 @@ public class Main {
         InventarioControlador c = new InventarioControlador(usuario, null);
         c.abrirVentana();
         LoginControlador co = new LoginControlador();
+        co.abrirVentana();
         UsuariosController con = new UsuariosController(usuario, null);
         con.abrirVentana();
     }
