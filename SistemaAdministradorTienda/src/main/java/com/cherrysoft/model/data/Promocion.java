@@ -6,6 +6,7 @@
 package com.cherrysoft.model.data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -45,7 +46,7 @@ public class Promocion implements Serializable {
     @JoinTable(name = "clientes_promociones",
             joinColumns = @JoinColumn(name = "promocion_id"),
             inverseJoinColumns = @JoinColumn(name = "cliente_id"))
-    private List<Cliente> clientes;
+    private List<Cliente> clientes = new ArrayList();
 
     public Integer getId() {
         return id;
@@ -77,6 +78,10 @@ public class Promocion implements Serializable {
 
     public void setClientes(List<Cliente> clientes) {
         this.clientes = clientes;
+    }
+    
+    public void addCliente(Cliente cliente) {
+        this.clientes.add(cliente);
     }
 
 }

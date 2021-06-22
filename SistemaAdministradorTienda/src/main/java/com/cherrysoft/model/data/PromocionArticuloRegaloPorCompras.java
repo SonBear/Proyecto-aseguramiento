@@ -28,6 +28,14 @@ public class PromocionArticuloRegaloPorCompras extends Promocion {
     @JoinColumn(name = "articulo_id")
     private Articulo articuloDeRegalo;
 
+    public PromocionArticuloRegaloPorCompras(List<PromocionArticuloCompra> articulosCompraPromocion, Articulo articuloDeRegalo) {
+        this.articulosCompraPromocion = articulosCompraPromocion;
+        this.articuloDeRegalo = articuloDeRegalo;
+    }
+
+    public PromocionArticuloRegaloPorCompras() {
+    }
+
     public List<PromocionArticuloCompra> getArticulosCompraPromocion() {
         return articulosCompraPromocion;
     }
