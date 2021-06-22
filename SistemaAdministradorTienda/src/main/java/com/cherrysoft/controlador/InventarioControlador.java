@@ -33,12 +33,11 @@ public class InventarioControlador extends Controlador {
     private Articulo articuloSeleccionado;
 
     public InventarioControlador(Usuario usuario, Controlador controladorAnterior) {
+        super(usuario, controladorAnterior);
         this.vista = new InventarioView();
         this.inventarioService = new InventarioImp();
         this.agregarArticuloForm = new AgregarArticuloForm(vista);
         this.actualizarArticuloForm = new AgregarArticuloForm(vista);
-        this.usuario = usuario;
-        this.controladorAnterior = controladorAnterior;
         configurarControlador();
 
     }
@@ -150,9 +149,13 @@ public class InventarioControlador extends Controlador {
     }
 
     private void filtrarArticulos(ActionEvent e) {
-        Integer min = Integer.parseInt(vista.getTxtMin().getText());
-        Integer max = Integer.parseInt(vista.getTxtMax().getText());
-        actualizarTabla(inventarioService.obtenerArticulosPorRangoCantidad(min, max));
+        try {
+            Integer min = Integer.parseInt(vista.getTxtMin().getText());
+            Integer max = Integer.parseInt(vista.getTxtMax().getText());
+            actualizarTabla(inventarioService.obtenerArticulosPorRangoCantidad(min, max));
+        } catch (NumberFormatException ex) {
+            DialogosUtil.mostrarDialogoDeError(vista, "Error en el formato de los numeros introducidos");
+        }
     }
 
     private void agregarArticulosCSV(ActionEvent e) {

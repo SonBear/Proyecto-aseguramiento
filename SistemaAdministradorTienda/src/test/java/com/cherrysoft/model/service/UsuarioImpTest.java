@@ -66,11 +66,9 @@ public class UsuarioImpTest {
         String usuario = "SonBear281";
         String password = "SonBear28";
         String email = "email@gmail.com";
-        Permiso permiso = new Permiso();
-        permiso.setDescripcion("Administrador del sistema");
-        permiso.setRol(Rol.ADMIN);
+
         UsuarioImp instance = new UsuarioImp();
-        instance.registrarUsuario(usuario, password, email, permiso);
+        instance.registrarUsuario(usuario, password, email, Rol.ADMIN);
         assertTrue(true);
         // TODO review the generated test code and remove the default call to fail.
     }

@@ -17,7 +17,17 @@ public abstract class Controlador {
 
     protected Usuario usuario;
     protected Controlador controladorAnterior;
-    protected final VerificadorService verificador = new VerificadorImp();
+    protected final VerificadorService verificador;
+
+    public Controlador() {
+        verificador = new VerificadorImp();
+    }
+
+    public Controlador(Usuario usuario, Controlador controladorAnterior) {
+        this.usuario = usuario;
+        this.controladorAnterior = controladorAnterior;
+        verificador = new VerificadorImp();
+    }
 
     public abstract void abrirVentana();
 
