@@ -5,6 +5,8 @@
  */
 package com.cherrysoft.controlador;
 
+import com.cherrysoft.excepciones.DescuentoInvalidoException;
+import com.cherrysoft.excepciones.NoHayClientesAsignadosException;
 import com.cherrysoft.model.data.Articulo;
 import com.cherrysoft.model.data.Cliente;
 import com.cherrysoft.model.data.Promocion;
@@ -16,6 +18,8 @@ import com.cherrysoft.vistas.PanelPromocionTipo1;
 import java.awt.event.ActionEvent;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -45,7 +49,8 @@ public class ControladorPanelPromocionTipo1 {
         servicioPromociones = new ServicioPromocionesImp();
         clientesAsignados = new HashMap();
         
-        panelTipo1.getBtnAgregarCliente().addActionListener(this::actionAsignarCliente);        
+        panelTipo1.getBtnAgregarCliente().addActionListener(this::actionAsignarCliente);    
+        panelTipo1.getBtnBorrarCliente().addActionListener(this::actionDesasignarCliente);
     }
 
     private void actionAsignarCliente(ActionEvent e) {
@@ -54,16 +59,39 @@ public class ControladorPanelPromocionTipo1 {
         rellenarTablaClientesAsignados(clientesAsignados, panelTipo1.getTableClientesAsignados());
     }
     
-    public void crearPromocion(Date inicio, Date fin) {    
-        Articulo articulo = this.getArticuloAComprar();
-        int cantidad = this.getCantidadAComprar();
-        double descuento = this.getDescuento();
-        Promocion promo = servicioPromociones.crearPromocionTipo1(articulo, cantidad, descuento, inicio, fin);
-        clientesAsignados.entrySet().forEach(entry -> {
-            servicioPromociones.asignarPromocionCliente(promo, entry.getValue());
-        });   
-        mostrarMensaje("La promoción fue creada exitosamente");
-        reiniciarPanel();
+    private void actionDesasignarCliente(ActionEvent e) {
+        Cliente seleccion = (Cliente) panelTipo1.getComboClientes().getSelectedItem();
+        clientesAsignados.remove(seleccion.getId());
+        rellenarTablaClientesAsignados(clientesAsignados, panelTipo1.getTableClientesAsignados());        
+    }
+    
+    public void crearPromocion(Date inicio, Date fin) {   
+        try {
+            Articulo articulo = this.getArticuloAComprar();
+            int cantidad = this.getCantidadAComprar();
+            double descuento = this.getDescuento();
+            
+            if(descuento < 0 || descuento > 1) {
+                throw new DescuentoInvalidoException();
+            }
+            
+            if(clientesAsignados.entrySet().isEmpty()) {
+                throw new NoHayClientesAsignadosException();
+            }
+            
+            Promocion promo = servicioPromociones.crearPromocionTipo1(articulo, cantidad, descuento, inicio, fin);
+            clientesAsignados.entrySet().forEach(entry -> {
+                servicioPromociones.asignarPromocionCliente(promo, entry.getValue());
+            });   
+            mostrarMensaje("La promoción fue creada exitosamente");
+            reiniciarPanel();            
+        } catch(NumberFormatException ex) {
+            mostrarMensaje("La cantidad y el descuento deben ser números");
+        } catch (DescuentoInvalidoException ex) {
+            mostrarMensaje(ex.getMessage());
+        } catch (NoHayClientesAsignadosException ex) {
+            mostrarMensaje(ex.getMessage());
+        }
     }
     
     private void mostrarMensaje(String mensaje) {

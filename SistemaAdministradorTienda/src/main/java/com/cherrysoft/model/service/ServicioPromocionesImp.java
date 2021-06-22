@@ -14,7 +14,6 @@ import com.cherrysoft.model.data.PromocionArticuloRegaloPorCompras;
 import com.cherrysoft.model.data.PromocionDescuentoArticuloCantidad;
 import com.cherrysoft.model.data.PromocionDescuentoArticuloPorCompras;
 import com.cherrysoft.model.data.PromocionGeneralArticulos;
-import com.cherrysoft.model.repository.PromocionArticuloCompraRepository;
 import com.cherrysoft.model.repository.PromocionArticuloRegaloPorComprasRepository;
 import com.cherrysoft.model.repository.PromocionDescuentoArticuloCantidadRepository;
 import com.cherrysoft.model.repository.PromocionDescuentoArticuloPorComprasRepository;
@@ -22,7 +21,6 @@ import com.cherrysoft.model.repository.PromocionGeneralArticulosRepository;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 /**
  *

@@ -16,7 +16,6 @@ import com.cherrysoft.vistas.VistaPromociones;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -144,17 +143,12 @@ public class Main {
         
         // Obtener promociones
         List<Promocion> promociones = servicio.obtenerPromociones();
-        promociones.forEach(promo -> {
-            System.out.println("promo: " + promo.toString());
-            System.out.println("id: " + promo.getId());
-        });
         
         // Eliminar promociones
         //servicio.eliminarPromocion(promociones.get(2));
         
         // Asociar promocion a un cliente
         servicio.asignarPromocionCliente(promociones.get(1), cliente1);
-        
         
         /*
         

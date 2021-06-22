@@ -5,6 +5,7 @@
  */
 package com.cherrysoft.controlador;
 
+import com.cherrysoft.excepciones.FechaInvalidaException;
 import com.cherrysoft.model.service.ServicioPromocionesImp;
 import com.cherrysoft.util.EnumTiposDePromociones;
 import com.cherrysoft.vistas.PanelPromocionTipo2;
@@ -19,6 +20,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -70,33 +72,39 @@ public class ControladorPromociones {
         }
     }
     
-    private void actionCrearPromocion(ActionEvent e) {
-        Date inicio = parseDate("2021-06-15");
-        Date fin = parseDate("2021-07-15");        
-        
-        switch(getTipoDePromocionActiva()) {
-            case Tipo1:
-                promocionT1.crearPromocion(inicio, fin);
-                break;
-            case Tipo2:
-                System.out.println("Promocion TIPO 2");
-                break;
-             case Tipo3:
-                System.out.println("Promocion TIPO 3");
-                break;
-            case Tipo4:
-                System.out.println("Promocion TIPO 4");
-                break;                
-        }        
+    private void actionCrearPromocion(ActionEvent e) { 
+        try {
+            String stringFechaInicio = vista.getTxtFechaDeinicio().getText();
+            String stringFechaFin = vista.getTxtFechaDeFin().getText();
+            Date inicio = parseDate(stringFechaInicio);
+            Date fin = parseDate(stringFechaFin);
+            
+            switch(getTipoDePromocionActiva()) {
+                case Tipo1:
+                    promocionT1.crearPromocion(inicio, fin);
+                    break;
+                case Tipo2:
+                    System.out.println("Promocion TIPO 2");
+                    break;
+                case Tipo3:
+                    System.out.println("Promocion TIPO 3");
+                    break;
+                case Tipo4:
+                    System.out.println("Promocion TIPO 4");
+                    break;        
+            }
+        } catch (FechaInvalidaException ex) {
+            mostrarMensaje(ex.getMessage());
+        }
     }    
     
-    private Date parseDate(String date) {
+    private Date parseDate(String date) throws FechaInvalidaException {
         Date parsedDate = null;
         try {
-            SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+            SimpleDateFormat ft = new SimpleDateFormat ("dd/MM/yyyy");            
             parsedDate = ft.parse(date);
         } catch (ParseException ex) {
-            Logger.getLogger(ControladorPromociones.class.getName()).log(Level.SEVERE, null, ex);
+            throw new FechaInvalidaException();
         }
         return parsedDate;    
     }
@@ -105,6 +113,10 @@ public class ControladorPromociones {
         EnumTiposDePromociones promocionActiva = (EnumTiposDePromociones) vista.getComboTipoPromocion().getSelectedItem();
         return promocionActiva;
     }
+    
+    private void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(null, mensaje);
+    }    
     
     private void loadPanel(JPanel panel) {
         vista.getPanelDetallesPromocion().removeAll();
