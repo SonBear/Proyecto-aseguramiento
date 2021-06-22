@@ -7,7 +7,6 @@ package com.cherrysoft.model.repository;
 
 import com.cherrysoft.model.data.Articulo;
 import com.cherrysoft.model.data.PromocionArticuloCompra;
-import com.cherrysoft.model.data.PromocionArticuloRegaloPorCompras;
 import com.cherrysoft.model.data.PromocionDescuentoArticuloPorCompras;
 import com.cherrysoft.util.PromocionesTestUtil;
 import java.util.ArrayList;

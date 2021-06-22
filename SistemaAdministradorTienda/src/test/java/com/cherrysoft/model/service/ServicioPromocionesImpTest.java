@@ -6,9 +6,7 @@
 package com.cherrysoft.model.service;
 
 import com.cherrysoft.model.data.Articulo;
-import com.cherrysoft.model.data.Cliente;
 import com.cherrysoft.model.data.Promocion;
-import com.cherrysoft.model.data.PromocionArticuloCompra;
 import com.cherrysoft.model.data.PromocionArticuloRegaloPorCompras;
 import com.cherrysoft.model.data.PromocionDescuentoArticuloCantidad;
 import com.cherrysoft.model.data.PromocionDescuentoArticuloPorCompras;

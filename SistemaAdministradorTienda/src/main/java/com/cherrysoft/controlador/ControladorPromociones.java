@@ -102,7 +102,8 @@ public class ControladorPromociones {
     }
     
     private EnumTiposDePromociones getTipoDePromocionActiva() {
-        EnumTiposDePromociones promocionActiva = (EnumTiposDePromociones) vista.getComboTipoPromocion().getSelectedItem();
+        EnumTiposDePromociones promocionActiva;
+        promocionActiva = (EnumTiposDePromociones) vista.getComboTipoPromocion().getSelectedItem();
         return promocionActiva;
     }
     
