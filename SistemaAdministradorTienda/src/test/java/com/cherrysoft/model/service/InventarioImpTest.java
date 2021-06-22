@@ -5,22 +5,12 @@
  */
 package com.cherrysoft.model.service;
 
-import com.cherrysoft.model.data.Articulo;
-import java.util.List;
-import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  *
  * @author Emmanuel Chable
  */
 public class InventarioImpTest {
-/*
+    /*
     public InventarioImpTest() {
     }
 
@@ -136,5 +126,5 @@ public class InventarioImpTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-*/
+     */
 }
