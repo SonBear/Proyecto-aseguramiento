@@ -7,12 +7,12 @@ import com.cherrysoft.model.repository.UsuarioRepository;
 import com.cherrysoft.model.data.Usuario;
 import com.cherrysoft.seguridad.ConfiguracionSistema;
 import com.cherrysoft.controlador.ControladorPromociones;
+import com.cherrysoft.controlador.ControladorProveedor;
 import com.cherrysoft.model.data.Articulo;
 import com.cherrysoft.model.data.ArticuloProveedor;
 import com.cherrysoft.model.data.Cliente;
 import com.cherrysoft.model.data.Promocion;
 import com.cherrysoft.model.data.PromocionArticuloCompra;
-import com.cherrysoft.model.data.PromocionArticuloRegaloPorCompras;
 import com.cherrysoft.model.data.Proveedor;
 import com.cherrysoft.model.repository.ArticuloRepository;
 import com.cherrysoft.model.repository.ClienteRepository;
@@ -22,7 +22,6 @@ import com.cherrysoft.vistas.VistaPromociones;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -42,6 +41,8 @@ public class Main {
         co.abrirVentana();
         UsuariosController con = new UsuariosController(usuario, null);
         con.abrirVentana();
+        ControladorProveedor controladorProveedor = new ControladorProveedor(usuario, null);
+        controladorProveedor.abrirVentana();
 
         //test
         Cliente cliente1 = new Cliente();
@@ -87,9 +88,16 @@ public class Main {
         proveedor.setEmail("email@Gmail.com");
         proveedor.setTelefono("+52 001992");
         proveedor.setNombre("Proveedor 1");
+        
+        Proveedor proveedor2 = new Proveedor();
+        proveedor2.setDireccion("C 145 y G");
+        proveedor2.setEmail("proveedor2@Gmail.com");
+        proveedor2.setTelefono("+52 7856891214");
+        proveedor2.setNombre("Proveedor 2");
 
         ProveedorRepository proveedorRepository = new ProveedorRepository();
         proveedorRepository.save(proveedor);
+        proveedorRepository.save(proveedor2);
 
         ArticuloProveedor articuloProveedor = new ArticuloProveedor();
         articuloProveedor.setArticulo(articulo);
