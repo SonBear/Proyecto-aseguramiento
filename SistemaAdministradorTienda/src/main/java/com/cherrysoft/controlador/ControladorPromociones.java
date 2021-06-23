@@ -17,8 +17,6 @@ import java.awt.event.ActionEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -110,7 +108,8 @@ public class ControladorPromociones {
     }
     
     private EnumTiposDePromociones getTipoDePromocionActiva() {
-        EnumTiposDePromociones promocionActiva = (EnumTiposDePromociones) vista.getComboTipoPromocion().getSelectedItem();
+        EnumTiposDePromociones promocionActiva;
+        promocionActiva = (EnumTiposDePromociones) vista.getComboTipoPromocion().getSelectedItem();
         return promocionActiva;
     }
     

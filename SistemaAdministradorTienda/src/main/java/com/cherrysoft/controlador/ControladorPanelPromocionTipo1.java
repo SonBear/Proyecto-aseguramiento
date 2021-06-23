@@ -18,8 +18,6 @@ import com.cherrysoft.vistas.PanelPromocionTipo1;
 import java.awt.event.ActionEvent;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;

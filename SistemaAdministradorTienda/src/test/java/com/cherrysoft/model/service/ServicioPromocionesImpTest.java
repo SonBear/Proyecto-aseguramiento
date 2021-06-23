@@ -6,9 +6,7 @@
 package com.cherrysoft.model.service;
 
 import com.cherrysoft.model.data.Articulo;
-import com.cherrysoft.model.data.Cliente;
 import com.cherrysoft.model.data.Promocion;
-import com.cherrysoft.model.data.PromocionArticuloCompra;
 import com.cherrysoft.model.data.PromocionArticuloRegaloPorCompras;
 import com.cherrysoft.model.data.PromocionDescuentoArticuloCantidad;
 import com.cherrysoft.model.data.PromocionDescuentoArticuloPorCompras;
@@ -35,6 +33,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Equipo1
  */
 public class ServicioPromocionesImpTest {
+    
     private ServicioPromocionesImp servicio;
     private static PromocionesTestUtil utilidades;
     private ArticuloRepository articulosRepository;   
@@ -69,9 +68,6 @@ public class ServicioPromocionesImpTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of crearPromocionTipo1 method, of class ServicioPromocionesImp.
-     */
     @Test
     public void testCrearPromocionTipo1() {
         System.out.println("Ejecutando prueba crear promocion tipo 1");
