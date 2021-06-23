@@ -7,7 +7,6 @@ import com.cherrysoft.model.repository.UsuarioRepository;
 import com.cherrysoft.model.data.Usuario;
 import com.cherrysoft.seguridad.ConfiguracionSistema;
 import com.cherrysoft.controlador.ControladorPromociones;
-import com.cherrysoft.controlador.MenuControlador;
 import com.cherrysoft.model.data.Articulo;
 import com.cherrysoft.model.data.ArticuloProveedor;
 import com.cherrysoft.model.data.Cliente;
@@ -30,10 +29,8 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-
         ConfiguracionSistema.configurarSistemaInicial();
         LoginControlador login = new LoginControlador();
         login.abrirVentana();
-
     }
 }
