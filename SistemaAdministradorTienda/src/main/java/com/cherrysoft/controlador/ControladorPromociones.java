@@ -26,17 +26,14 @@ import javax.swing.JPanel;
  *
  * @author Equipo1
  */
-
 public class ControladorPromociones extends Controlador {
 
     private ControladorPanelPromocionTipo1 promocionT1;
     private PanelPromocionTipo2 panelTipo2;
     private PanelPromocionTipo3 panelTipo3;
     private PanelPromocionTipo4 panelTipo4;
-    ServicioPromocionesImp servicioPromociones;
+    private ServicioPromocionesImp servicioPromociones;
     private VistaPromociones vista;
-    private Controlador controladorAnterior;
-
 
     public ControladorPromociones(Usuario usuario, Controlador controladorAnterior) {
         super(usuario, controladorAnterior);
@@ -46,11 +43,6 @@ public class ControladorPromociones extends Controlador {
 
     }
 
-    
-    public void setControladorAnterior(Controlador controladorAnterior) {
-        this.controladorAnterior = controladorAnterior;
-    }
-    
     private void cambiarTipoDePromocion(ActionEvent e) {
         switch (getTipoDePromocionActiva()) {
             case Tipo1:
@@ -60,23 +52,23 @@ public class ControladorPromociones extends Controlador {
                 loadPanel(this.vista, panelTipo2);
                 break;
 
-             case Tipo3:
+            case Tipo3:
                 loadPanel(this.vista, panelTipo3);
                 break;
             case Tipo4:
                 loadPanel(this.vista, panelTipo4);
-                break;                
+                break;
         }
     }
-    
-    private void actionCrearPromocion(ActionEvent e) { 
+
+    private void actionCrearPromocion(ActionEvent e) {
         try {
             String stringFechaInicio = vista.getTxtFechaDeinicio().getText();
             String stringFechaFin = vista.getTxtFechaDeFin().getText();
             Date inicio = parseDate(stringFechaInicio);
             Date fin = parseDate(stringFechaFin);
-            
-            switch(getTipoDePromocionActiva()) {
+
+            switch (getTipoDePromocionActiva()) {
                 case Tipo1:
                     promocionT1.crearPromocion(inicio, fin);
                     break;
@@ -88,17 +80,17 @@ public class ControladorPromociones extends Controlador {
                     break;
                 case Tipo4:
                     System.out.println("Promocion TIPO 4");
-                    break;        
+                    break;
             }
         } catch (FechaInvalidaException ex) {
             mostrarMensaje(ex.getMessage());
         }
-    }    
-    
+    }
+
     private Date parseDate(String date) throws FechaInvalidaException {
         Date parsedDate = null;
         try {
-            SimpleDateFormat ft = new SimpleDateFormat ("dd/MM/yyyy");            
+            SimpleDateFormat ft = new SimpleDateFormat("dd/MM/yyyy");
 
             parsedDate = ft.parse(date);
         } catch (ParseException ex) {
@@ -113,26 +105,26 @@ public class ControladorPromociones extends Controlador {
         return promocionActiva;
     }
 
-    
     private void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje);
-    }    
-    
+    }
+
     private void loadPanel(VistaPromociones vista, JPanel panel) {
 
         vista.getPanelDetallesPromocion().removeAll();
         vista.getPanelDetallesPromocion().setLayout(new BorderLayout());
         vista.getPanelDetallesPromocion().add(panel, BorderLayout.CENTER);
         vista.getPanelDetallesPromocion().validate();
-        vista.getPanelDetallesPromocion().repaint();        
-    }    
-    
+        vista.getPanelDetallesPromocion().repaint();
+    }
+
     private void configurarVista(VistaPromociones vista) {
-        this.loadPanel(vista, promocionT1.getPanel()); 
+        this.loadPanel(vista, promocionT1.getPanel());
         vista.getComboTipoPromocion().setModel(new DefaultComboBoxModel(EnumTiposDePromociones.values()));
         vista.getBtnCrearPromocion().addActionListener(this::actionCrearPromocion);
-        vista.getComboTipoPromocion().addActionListener(this::cambiarTipoDePromocion); 
-        
+        vista.getComboTipoPromocion().addActionListener(this::cambiarTipoDePromocion);
+        vista.getBtnRegresar().addActionListener((e) -> this.regresarControladorAnterior());
+
         if (!verificador.esUsuarioAdmin(usuario)) {
             vista.getComboTipoPromocion().setEnabled(false);
             vista.getTxtFechaDeinicio().setEnabled(false);
@@ -146,7 +138,7 @@ public class ControladorPromociones extends Controlador {
 
     @Override
     public void abrirVentana() {
-        this.vista = new VistaPromociones();  
+        this.vista = new VistaPromociones();
         this.configurarVista(this.vista);
         this.vista.setVisible(true);
     }
@@ -162,9 +154,9 @@ public class ControladorPromociones extends Controlador {
         this.panelTipo2 = new PanelPromocionTipo2();
         this.panelTipo3 = new PanelPromocionTipo3();
         this.panelTipo4 = new PanelPromocionTipo4();
-        
+
         this.servicioPromociones = new ServicioPromocionesImp();
+
     }
-    
 
 }
