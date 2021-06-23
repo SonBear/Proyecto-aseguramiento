@@ -45,6 +45,7 @@
                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="comboClientes" alignment="0" pref="148" max="32767" attributes="0"/>
                   <Component id="btnAgregarCliente" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnBorrarCliente" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="55" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -80,6 +81,8 @@
                               <Component id="comboClientes" min="-2" pref="32" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnAgregarCliente" min="-2" pref="34" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btnBorrarCliente" min="-2" pref="36" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane2" min="-2" pref="199" max="-2" attributes="0"/>
                       </Group>
@@ -221,6 +224,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarClienteActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnBorrarCliente">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Borrar cliente"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

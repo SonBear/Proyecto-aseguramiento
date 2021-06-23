@@ -12,17 +12,14 @@ import com.cherrysoft.model.data.ArticuloProveedor;
 import com.cherrysoft.model.data.Cliente;
 import com.cherrysoft.model.data.Promocion;
 import com.cherrysoft.model.data.PromocionArticuloCompra;
-import com.cherrysoft.model.data.PromocionArticuloRegaloPorCompras;
 import com.cherrysoft.model.data.Proveedor;
 import com.cherrysoft.model.repository.ArticuloRepository;
 import com.cherrysoft.model.repository.ClienteRepository;
 import com.cherrysoft.model.repository.ProveedorRepository;
 import com.cherrysoft.model.service.ServicioPromocionesImp;
-import com.cherrysoft.vistas.VistaPromociones;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -175,15 +172,13 @@ public class Main {
         //servicio.eliminarPromocion(promociones.get(2));
         // Asociar promocion a un cliente
         servicio.asignarPromocionCliente(promociones.get(1), cliente1);
-
+        
         /*
 
             PROBANDO LA VISTA
 
          */
-        VistaPromociones vista = new VistaPromociones();
-        ControladorPromociones control = new ControladorPromociones(vista);
-        vista.setVisible(true);
-
+        ControladorPromociones controlPromociones = new ControladorPromociones(usuario, null);
+        controlPromociones.abrirVentana();
     }
 }
