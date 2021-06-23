@@ -26,29 +26,40 @@ import javax.swing.JPanel;
  *
  * @author Equipo1
  */
+
 public class ControladorPromociones extends Controlador {
+
     private ControladorPanelPromocionTipo1 promocionT1;
     private PanelPromocionTipo2 panelTipo2;
     private PanelPromocionTipo3 panelTipo3;
     private PanelPromocionTipo4 panelTipo4;
     ServicioPromocionesImp servicioPromociones;
     private VistaPromociones vista;
+    private Controlador controladorAnterior;
+
 
     public ControladorPromociones(Usuario usuario, Controlador controladorAnterior) {
         super(usuario, controladorAnterior);
         this.vista = new VistaPromociones();
         this.configurarControlador();
         this.configurarVista(vista);
+
+    }
+
+    
+    public void setControladorAnterior(Controlador controladorAnterior) {
+        this.controladorAnterior = controladorAnterior;
     }
     
     private void cambiarTipoDePromocion(ActionEvent e) {
-        switch(getTipoDePromocionActiva()) {
+        switch (getTipoDePromocionActiva()) {
             case Tipo1:
                 loadPanel(this.vista, promocionT1.getPanel());
                 break;
             case Tipo2:
                 loadPanel(this.vista, panelTipo2);
                 break;
+
              case Tipo3:
                 loadPanel(this.vista, panelTipo3);
                 break;
@@ -88,24 +99,27 @@ public class ControladorPromociones extends Controlador {
         Date parsedDate = null;
         try {
             SimpleDateFormat ft = new SimpleDateFormat ("dd/MM/yyyy");            
+
             parsedDate = ft.parse(date);
         } catch (ParseException ex) {
             throw new FechaInvalidaException();
         }
-        return parsedDate;    
+        return parsedDate;
     }
-    
+
     private EnumTiposDePromociones getTipoDePromocionActiva() {
         EnumTiposDePromociones promocionActiva;
         promocionActiva = (EnumTiposDePromociones) vista.getComboTipoPromocion().getSelectedItem();
         return promocionActiva;
     }
+
     
     private void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje);
     }    
     
     private void loadPanel(VistaPromociones vista, JPanel panel) {
+
         vista.getPanelDetallesPromocion().removeAll();
         vista.getPanelDetallesPromocion().setLayout(new BorderLayout());
         vista.getPanelDetallesPromocion().add(panel, BorderLayout.CENTER);
@@ -152,4 +166,5 @@ public class ControladorPromociones extends Controlador {
         this.servicioPromociones = new ServicioPromocionesImp();
     }
     
+
 }

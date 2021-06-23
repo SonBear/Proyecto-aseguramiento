@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cherrysoft.model.data;
 
 import java.io.Serializable;
@@ -93,9 +88,15 @@ public class CompraProveedor implements Serializable {
     }
 
     public BigDecimal getCostoTotal() {
-        return costoTotal;
+        return articuloProveedor
+                .getPrecio()
+                .multiply(BigDecimal.valueOf(getCantidad()));
     }
 
+    public void calcularCostoTotal(){
+        this.setCostoTotal(getCostoTotal());
+    }
+    
     public void setCostoTotal(BigDecimal costoTotal) {
         this.costoTotal = costoTotal;
     }

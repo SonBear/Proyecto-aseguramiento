@@ -8,7 +8,10 @@ package com.cherrysoft.model.service;
 import com.cherrysoft.model.data.Permiso;
 import com.cherrysoft.model.data.Rol;
 import com.cherrysoft.model.data.Usuario;
+import com.cherrysoft.seguridad.ConfiguracionSistema;
+import com.github.javafaker.Faker;
 import java.util.List;
+import java.util.Objects;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,8 +24,11 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Emmanuel Chable
  */
 public class UsuarioImpTest {
-/*
+
+    private Faker faker = new Faker();
+
     public UsuarioImpTest() {
+        ConfiguracionSistema.configurarSistemaInicial();
     }
 
     @BeforeAll
@@ -41,45 +47,39 @@ public class UsuarioImpTest {
     public void tearDown() {
     }
 
-    @AfterAll
     @Test
     public void testLogin() throws Exception {
+
         System.out.println("login");
-        String usuario = "SonBear28";
-        String password = "SonBear28";
+        String usuario = "admin";
+        String password = "admin";
         UsuarioImp instance = new UsuarioImp();
         Usuario result = instance.login(usuario, password);
-        System.out.println(result.getUsuario() + " " + result.getCorreo() + " " + result.getContrasenia());
-        assertTrue(true);
-        // TODO review the generated test code and remove the default call to fail.
+        assertTrue(!Objects.isNull(result));
     }
 
     @Test
     public void testRegistrarUsuario() throws Exception {
         System.out.println("registrarUsuario");
-        String usuario = "SonBear281";
-        String password = "SonBear28";
+        String usuario = faker.name().lastName();
+        String password = "123123";
         String email = "email@gmail.com";
 
         UsuarioImp instance = new UsuarioImp();
         instance.registrarUsuario(usuario, password, email, Rol.ADMIN);
         assertTrue(true);
-        // TODO review the generated test code and remove the default call to fail.
     }
 
     @Test
-    public void testActualizarDatosUsuario() {
+    public void testActualizarDatosUsuario() throws Exception {
         System.out.println("actualizarDatosUsuario");
-
-        String usuario = "usuario2";
-        String email = "d";
+        String usuario = "admin";
+        String email = "amdinl";
         String password = "1234";
-        Permiso permiso = null;
         UsuarioImp instance = new UsuarioImp();
-        Usuario usr = instance.obtenerUsuarios().get(0);
-        Usuario expResult = null;
-        Usuario result = instance.actualizarDatosUsuario(usr, usuario, email, password, Rol.ADMIN);
-        assertTrue(true);
+        Usuario user = instance.login("admin", "admin");
+        Usuario result = instance.actualizarDatosUsuario(user, usuario, email, password, Rol.ADMIN);
+        assertTrue(result.getCorreo().equals(email));
 
     }
 
@@ -87,20 +87,17 @@ public class UsuarioImpTest {
     public void testObtenerUsuarios() {
         System.out.println("obtenerUsuarios");
         UsuarioImp instance = new UsuarioImp();
-        List<Usuario> expResult = null;
         List<Usuario> result = instance.obtenerUsuarios();
-        assertTrue(result != null);
+        assertTrue(result.size() > 0);
     }
 
     @Test
-    public void testEliminarUsuario() {
+    public void testEliminarUsuario() throws Exception {
         System.out.println("eliminarUsuario");
-
         UsuarioImp instance = new UsuarioImp();
-        Usuario usuario = instance.obtenerUsuarios().get(1);
+        Usuario usuario = instance.login("admin", "admin");
         Usuario result = instance.eliminarUsuario(usuario);
         assertTrue(result != null);
-        // TODO review the generated test code and remove the default call to fail.
-    }*/
+    }
 
 }

@@ -7,6 +7,7 @@ import com.cherrysoft.vista.LoginView;
 import java.awt.event.ActionEvent;
 
 /**
+ * Controlador para la vista del login y servicio de usuarios
  *
  * @author Emmanuel Chable
  */
@@ -14,12 +15,12 @@ public class LoginControlador extends Controlador {
 
     private final LoginView vista;
     private final UsuarioService usuarioService;
-
-    //private final MenuControlador menuControlador;
+    private final MenuControlador menuControlador;
+    
     public LoginControlador() {
         vista = new LoginView();
         usuarioService = new UsuarioImp();
-        //menuControlador = new MenuControlador();
+        menuControlador = new MenuControlador();
 
         configurarControlador();
     }
@@ -34,9 +35,9 @@ public class LoginControlador extends Controlador {
         this.vista.getTxtUsuario().setText("");
         this.vista.getTxtContrasenia().setText("");
         this.vista.setVisible(false);
-        //menuControlador.setControladorAnterior(this)
-        //menuControlador.setUsuario(this.usuario);
-        //menuControlador.abrirVentana();
+        menuControlador.setControladorAnterior(this);
+        menuControlador.setUsuario(this.usuario);
+        menuControlador.abrirVentana();
     }
 
     @Override
@@ -51,13 +52,10 @@ public class LoginControlador extends Controlador {
     }
 
     private void iniciarSesion(ActionEvent e) {
-        String usuario = vista.getTxtUsuario().getText();
+        String usuarioNombre = vista.getTxtUsuario().getText();
         String contrasenia = vista.getTxtContrasenia().getText();
         try {
-            this.usuario = usuarioService.login(usuario, contrasenia);
-
-            System.out.println(this.usuario.getUsuario() + " " + this.usuario.getContrasenia());
-
+            this.usuario = usuarioService.login(usuarioNombre, contrasenia);
             cerrarVentana();
         } catch (Exception ex) {
             DialogosUtil.mostrarDialogoDeError(vista, ex.getMessage());

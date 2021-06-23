@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cherrysoft.controlador;
 
 import com.cherrysoft.model.data.Usuario;
@@ -10,6 +5,7 @@ import com.cherrysoft.seguridad.VerificadorImp;
 import com.cherrysoft.seguridad.VerificadorService;
 
 /**
+ * Resguarda funcionalidades comunes de los controladores
  *
  * @author Emmanuel Chable
  */
@@ -35,6 +31,10 @@ public abstract class Controlador {
 
     public abstract void configurarControlador();
 
+    public void setControladorAnterior(Controlador controladorAnterior) {
+        this.controladorAnterior = controladorAnterior;
+    }
+    
     public void regresarControladorAnterior() {
         this.cerrarVentana();
         controladorAnterior.abrirVentana();
