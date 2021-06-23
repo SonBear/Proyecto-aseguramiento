@@ -14,6 +14,8 @@ import java.util.Objects;
 import javax.swing.JComboBox;
 
 /**
+ * Controlador para la vista de administracion de usuarios y el servicio de
+ * usuarios
  *
  * @author Emmanuel Chable
  */

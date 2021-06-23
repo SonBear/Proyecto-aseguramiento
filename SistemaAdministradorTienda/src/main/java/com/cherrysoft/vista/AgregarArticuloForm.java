@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cherrysoft.vista;
 
-import java.awt.Frame;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -23,8 +17,8 @@ public class AgregarArticuloForm extends JDialog {
      */
     public AgregarArticuloForm(JFrame owner) {
         super(owner, true);
-        this.setLocationRelativeTo(owner);
         initComponents();
+        this.setLocationRelativeTo(owner);
     }
 
     /**

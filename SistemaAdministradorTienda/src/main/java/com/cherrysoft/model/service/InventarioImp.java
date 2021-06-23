@@ -16,6 +16,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
 /**
+ * Implementacion de la interfaz InventarioService
  *
  * @author Emmanuel Chable
  */
@@ -90,7 +91,7 @@ public class InventarioImp implements InventarioService {
     }
 
     /**
-     * Header id, cantidad, precio, nombre, descripcion
+     * Header del csv es id, cantidad, precio, nombre, descripcion
      *
      * @param rutaArchivo
      * @return
@@ -99,14 +100,18 @@ public class InventarioImp implements InventarioService {
     @Override
     public List<Articulo> registrarArticulosPorCsv(String rutaArchivo) throws FileNotFoundException, IOException, NumberFormatException {
         Reader in = new FileReader(rutaArchivo);
-        Iterable<CSVRecord> registros = CSVFormat.DEFAULT.withHeader(CabecerasCsv.class).withFirstRecordAsHeader().parse(in);
+        Iterable<CSVRecord> registros = CSVFormat.DEFAULT
+                .withHeader(CabecerasCsv.class)
+                .withFirstRecordAsHeader()
+                .parse(in);
         List<Articulo> articulos = new ArrayList<>();
         registros.forEach((CSVRecord registro) -> {
-            Integer id = parseInteger(registro.get(CabecerasCsv.id));
-            Integer cantidad = parseInteger(registro.get(CabecerasCsv.cantidad));
+            Integer id = convertirInteger(registro.get(CabecerasCsv.id));
+            Integer cantidad = convertirInteger(registro.get(CabecerasCsv.cantidad));
             String descripcion = registro.get(CabecerasCsv.descripcion);
             String nombre = registro.get(CabecerasCsv.nombre);
-            BigDecimal precio = BigDecimal.valueOf(Double.parseDouble(registro.get(CabecerasCsv.precio)));
+            BigDecimal precio = BigDecimal
+                    .valueOf(Double.parseDouble(registro.get(CabecerasCsv.precio)));
 
             Articulo articulo;
 
@@ -131,7 +136,7 @@ public class InventarioImp implements InventarioService {
         return articulos;
     }
 
-    private Integer parseInteger(String string) throws NumberFormatException {
+    private Integer convertirInteger(String string) throws NumberFormatException {
         return Integer.parseInt(string);
     }
 

@@ -7,6 +7,7 @@ import com.cherrysoft.vista.LoginView;
 import java.awt.event.ActionEvent;
 
 /**
+ * Controlador para la vista del login y servicio de usuarios
  *
  * @author Emmanuel Chable
  */
@@ -51,13 +52,10 @@ public class LoginControlador extends Controlador {
     }
 
     private void iniciarSesion(ActionEvent e) {
-        String usuario = vista.getTxtUsuario().getText();
+        String usuarioNombre = vista.getTxtUsuario().getText();
         String contrasenia = vista.getTxtContrasenia().getText();
         try {
-            this.usuario = usuarioService.login(usuario, contrasenia);
-
-            System.out.println(this.usuario.getUsuario() + " " + this.usuario.getContrasenia());
-
+            this.usuario = usuarioService.login(usuarioNombre, contrasenia);
             cerrarVentana();
         } catch (Exception ex) {
             DialogosUtil.mostrarDialogoDeError(vista, ex.getMessage());
