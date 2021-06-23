@@ -93,9 +93,15 @@ public class CompraProveedor implements Serializable {
     }
 
     public BigDecimal getCostoTotal() {
-        return costoTotal;
+        return articuloProveedor
+                .getPrecio()
+                .multiply(BigDecimal.valueOf(getCantidad()));
     }
 
+    public void calcularCostoTotal(){
+        this.setCostoTotal(getCostoTotal());
+    }
+    
     public void setCostoTotal(BigDecimal costoTotal) {
         this.costoTotal = costoTotal;
     }

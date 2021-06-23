@@ -26,7 +26,10 @@ public class ProveedorRepositoryTest {
 
     @AfterAll
     public static void tearDown() {
-
+        if (proveedorRepository != null) {
+            proveedorRepository.getEntityManager().clear();
+        }
+        System.out.println("Clear a Proveedor repository");
     }
 
     @Test
