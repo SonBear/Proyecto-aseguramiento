@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cherrysoft.controlador.util;
 
 import java.awt.Component;
-import java.awt.Frame;
 import javax.swing.JOptionPane;
 
 /**
+ * Utilidades para la generacion de mensajes emergentes
  *
  * @author Emmanuel Chable
  */

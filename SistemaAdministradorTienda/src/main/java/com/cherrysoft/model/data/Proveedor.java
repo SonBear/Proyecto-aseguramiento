@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cherrysoft.model.data;
 
 import java.io.Serializable;
@@ -91,7 +86,7 @@ public class Proveedor implements Serializable {
     public void setProveedorArticulos(List<ArticuloProveedor> proveedorArticulos) {
         this.proveedorArticulos = proveedorArticulos;
     }
-    
+
     public void agregarArticulo(ArticuloProveedor art) {
         this.proveedorArticulos.add(art);
     }

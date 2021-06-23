@@ -10,7 +10,6 @@ import com.cherrysoft.vista.AgregarArticuloForm;
 import com.cherrysoft.vista.InventarioView;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,6 +20,7 @@ import javax.persistence.EntityExistsException;
 import javax.swing.JFileChooser;
 
 /**
+ * Controlador para el servicio y vista del inventario
  *
  * @author Emmanuel Chable
  */
