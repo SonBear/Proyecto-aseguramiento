@@ -22,6 +22,7 @@ public class UsuariosController extends Controlador {
     private final UsuariosView vista;
     private final UsuarioService usuarioService;
     private Usuario usuarioSeleccionado;
+    protected Controlador controladorAnterior;
 
     public UsuariosController(Usuario usuario, Controlador controladorAnterior) {
         super(usuario, controladorAnterior);
@@ -41,6 +42,11 @@ public class UsuariosController extends Controlador {
     public void cerrarVentana() {
         this.vista.setVisible(false);
         TablaManager.eliminarFilasTable(vista.getTablaUsuarios());
+    }
+    
+    @Override
+    public void setControladorAnterior(Controlador controladorAnterior) {
+        this.controladorAnterior = controladorAnterior;
     }
 
     @Override
