@@ -17,7 +17,6 @@ import com.cherrysoft.model.repository.ArticuloRepository;
 import com.cherrysoft.model.repository.ClienteRepository;
 import com.cherrysoft.model.repository.ProveedorRepository;
 import com.cherrysoft.model.service.ServicioPromocionesImp;
-import com.cherrysoft.vistas.VistaPromociones;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -179,9 +178,7 @@ public class Main {
             PROBANDO LA VISTA
 
          */
-        VistaPromociones vista = new VistaPromociones();
-        ControladorPromociones control = new ControladorPromociones(vista);
-        vista.setVisible(true);
-
+        ControladorPromociones controlPromociones = new ControladorPromociones(usuario, null);
+        controlPromociones.abrirVentana();
     }
 }
