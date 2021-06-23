@@ -21,14 +21,14 @@ import org.junit.jupiter.api.Test;
  *
  * @author Eusebio Ajas
  */
-public class ServiceProveedorImpTest {
+public class ServicioProveedorImpTest {
 
     private final Faker faker = new Faker();
     private static ServicioProveedoresImp servicioProveedores;
     private static ArticuloRepository articuloRepository;
     private static PromocionesTestUtil utilidades;
 
-    public ServiceProveedorImpTest() {
+    public ServicioProveedorImpTest() {
         utilidades = new PromocionesTestUtil();
     }
     
