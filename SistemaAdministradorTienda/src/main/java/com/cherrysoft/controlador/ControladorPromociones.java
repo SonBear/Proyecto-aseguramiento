@@ -33,6 +33,7 @@ public class ControladorPromociones {
     private PanelPromocionTipo4 panelTipo4;
     ServicioPromocionesImp servicioPromociones;
     private VistaPromociones vista;
+    private Controlador controladorAnterior;
 
     public ControladorPromociones(VistaPromociones vista) {
         this.vista = vista;
@@ -54,6 +55,11 @@ public class ControladorPromociones {
         this.vista.getComboTipoPromocion().addActionListener(this::cambiarTipoDePromocion);
     }
 
+    
+    public void setControladorAnterior(Controlador controladorAnterior) {
+        this.controladorAnterior = controladorAnterior;
+    }
+    
     private void cambiarTipoDePromocion(ActionEvent e) {
         switch (getTipoDePromocionActiva()) {
             case Tipo1:
