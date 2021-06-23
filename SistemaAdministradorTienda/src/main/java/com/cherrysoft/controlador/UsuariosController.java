@@ -44,7 +44,6 @@ public class UsuariosController extends Controlador {
         TablaManager.eliminarFilasTable(vista.getTablaUsuarios());
     }
     
-    @Override
     public void setControladorAnterior(Controlador controladorAnterior) {
         this.controladorAnterior = controladorAnterior;
     }

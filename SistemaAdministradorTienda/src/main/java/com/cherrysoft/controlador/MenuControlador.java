@@ -58,8 +58,13 @@ public class MenuControlador extends Controlador {
         this.vista.getBotonVender().addActionListener(this::Vender);
         this.vista.getBotonVentasDiarias().addActionListener(this::VentasDiarias);
     }
-
+    
     @Override
+    public void regresarControladorAnterior() {
+        this.cerrarVentana();
+        controladorAnterior.abrirVentana();
+    }
+    
     public void setControladorAnterior(Controlador controladorAnterior) {
         this.controladorAnterior = controladorAnterior;
     }
