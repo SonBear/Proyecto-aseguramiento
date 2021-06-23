@@ -34,6 +34,7 @@ public class PromocionesTestUtil {
     private final Faker faker = new Faker();
     private final int NUM_ARTICULOS = 5;    
     private ArticuloRepository articulosRepository;
+    private static int idArticulos = 1000;
     
     public PromocionesTestUtil() {
         articulosRepository = new ArticuloRepository();            
@@ -76,6 +77,8 @@ public class PromocionesTestUtil {
     
     public Articulo crearArticulo() {
         Articulo articulo = new Articulo();
+        //articulo.setId(faker.number().numberBetween(1, 1000));
+        articulo.setId(++idArticulos);
         articulo.setNombre(faker.food().fruit());
         articulo.setDescripcion("Descripcion: " + faker.number().digits(3));
         articulo.setPrecio(BigDecimal.valueOf(faker.number().numberBetween(5, 100)));
@@ -91,7 +94,11 @@ public class PromocionesTestUtil {
     }
     
     public Articulo getArticuloAleatorio() {
-        return articulosRepository.findById(faker.number().numberBetween(1, NUM_ARTICULOS)).get();
+        Iterable<Articulo> articulos = articulosRepository.findAll();
+        List<Articulo> listaArticulos = new ArrayList();
+        articulos.forEach(art -> listaArticulos.add(art));
+        //return articulosRepository.findById(faker.number().numberBetween(1, NUM_ARTICULOS)).get();
+        return listaArticulos.get(faker.number().numberBetween(0, listaArticulos.size() - 1));
     }
     
     public Articulo getArticuloAleatorio(Articulo articuloAEvitar) {

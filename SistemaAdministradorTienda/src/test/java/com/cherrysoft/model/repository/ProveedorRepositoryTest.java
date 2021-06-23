@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author Eusebio Ajas
  */
-
 public class ProveedorRepositoryTest {
 
     private static ProveedorRepository proveedorRepository;
@@ -23,15 +22,11 @@ public class ProveedorRepositoryTest {
     @BeforeAll
     public static void setup() {
         proveedorRepository = new ProveedorRepository();
-        System.out.println("Proveedor repository creado");
     }
 
     @AfterAll
     public static void tearDown() {
-        if (proveedorRepository != null) {
-            proveedorRepository.getEntityManager().close();
-        }
-        System.out.println("Proveedor repository cerrado");
+
     }
 
     @Test
@@ -101,8 +96,8 @@ public class ProveedorRepositoryTest {
         System.out.println("Corriendo prueba actualizar un proveedor...");
 
         int idProveedor = 1;
-        String telefonoActualizado = "99-98-56-47-58"; 
-        
+        String telefonoActualizado = "99-98-56-47-58";
+
         Proveedor proveedor = new Proveedor();
         proveedor.setId(idProveedor);
         proveedor.setTelefono(telefonoActualizado);
