@@ -42,6 +42,7 @@ public class VistaPromociones extends javax.swing.JFrame {
         txtFechaDeFin = new javax.swing.JTextField();
         panelDetallesPromocion = new javax.swing.JPanel();
         btnCrearPromocion = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,6 +113,8 @@ public class VistaPromociones extends javax.swing.JFrame {
         btnCrearPromocion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnCrearPromocion.setText("Crear promoción");
 
+        btnRegresar.setText("Regresar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,7 +122,9 @@ public class VistaPromociones extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(227, 227, 227)
+                        .addContainerGap()
+                        .addComponent(btnRegresar)
+                        .addGap(144, 144, 144)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -134,8 +139,13 @@ public class VistaPromociones extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnRegresar)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -168,9 +178,17 @@ public class VistaPromociones extends javax.swing.JFrame {
         return txtFechaDeinicio;
     }
 
+    public JButton getBtnRegresar() {
+        return btnRegresar;
+    }
+
+    public void setBtnRegresar(JButton btnRegresar) {
+        this.btnRegresar = btnRegresar;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearPromocion;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> comboTipoPromocion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

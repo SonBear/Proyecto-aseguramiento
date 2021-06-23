@@ -31,12 +31,25 @@ public abstract class Controlador {
 
     public abstract void configurarControlador();
 
-    public void setControladorAnterior(Controlador controladorAnterior) {
-        this.controladorAnterior = controladorAnterior;
-    }
-    
     public void regresarControladorAnterior() {
         this.cerrarVentana();
         controladorAnterior.abrirVentana();
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Controlador getControladorAnterior() {
+        return controladorAnterior;
+    }
+
+    public void setControladorAnterior(Controlador controladorAnterior) {
+        this.controladorAnterior = controladorAnterior;
+    }
+
 }

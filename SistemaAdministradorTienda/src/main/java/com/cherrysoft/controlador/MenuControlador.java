@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cherrysoft.controlador;
 
 import com.cherrysoft.controlador.util.DialogosUtil;
-import com.cherrysoft.interfaces.UsuarioService;
 import com.cherrysoft.model.data.Usuario;
 import com.cherrysoft.vista.MenuView;
-import com.cherrysoft.vistas.VistaPromociones;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 
@@ -20,32 +13,26 @@ import javax.swing.JOptionPane;
 public class MenuControlador extends Controlador {
 
     private final MenuView vista;
-    private UsuarioService usuarioService;
-    protected Controlador controladorAnterior;
 
-    public MenuControlador() {
+    public MenuControlador(Usuario usuario, Controlador controladorAnterior) {
+        super(usuario, controladorAnterior);
         vista = new MenuView();
-
         configurarControlador();
-    }
-
-    public void setUsuario(UsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
     }
 
     @Override
     public void abrirVentana() {
         this.vista.setVisible(true);
+        this.vista.setLocationRelativeTo(null);
     }
 
     @Override
     public void cerrarVentana() {
-        this.vista.setVisible(false);
+        this.vista.dispose();
     }
 
     @Override
     public void configurarControlador() {
-        this.vista.setLocationRelativeTo(null);
         this.vista.getBotonCerrarSesion().addActionListener(this::cerrarSesion);
         this.vista.getBotonClientes().addActionListener(this::Clientes);
         this.vista.getBotonInventario().addActionListener(this::Inventario);
@@ -59,23 +46,10 @@ public class MenuControlador extends Controlador {
         this.vista.getBotonVentasDiarias().addActionListener(this::VentasDiarias);
     }
 
-    @Override
-    public void setControladorAnterior(Controlador controladorAnterior) {
-        this.controladorAnterior = controladorAnterior;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
     private void cerrarSesion(ActionEvent e) {
         try {
-            cerrarVentana();
             regresarControladorAnterior();
+
         } catch (Exception ex) {
             DialogosUtil.mostrarDialogoDeError(vista, ex.getMessage());
         }
@@ -93,23 +67,26 @@ public class MenuControlador extends Controlador {
 
     private void Inventario(ActionEvent e) {
         try {
-            cerrarVentana();
+
             InventarioControlador inventarioControlador = new InventarioControlador(usuario, this);
             inventarioControlador.abrirVentana();
+            cerrarVentana();
         } catch (Exception ex) {
             DialogosUtil.mostrarDialogoDeError(vista, ex.getMessage());
         }
     }
 
     private void Promociones(ActionEvent e) {
+
         try {
+            ControladorPromociones controladorPromociones = new ControladorPromociones(this.usuario, this);
+            controladorPromociones.abrirVentana();
             cerrarVentana();
-            VistaPromociones vistaPromociones = new VistaPromociones();
-            ControladorPromociones controladorPromociones = new ControladorPromociones(vistaPromociones);
-            controladorPromociones.setControladorAnterior(this);
+
         } catch (Exception ex) {
             DialogosUtil.mostrarDialogoDeError(vista, ex.getMessage());
         }
+
     }
 
     //PENDIENTE
@@ -124,9 +101,9 @@ public class MenuControlador extends Controlador {
 
     private void Salir(ActionEvent e) {
         try {
-            int resultado = JOptionPane.showConfirmDialog(null, "Método con 2 parámetros");
+            int resultado = JOptionPane.showConfirmDialog(vista, "¿Está seguro que desea salir?");
             if (resultado == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(null, "Que tenga buen día.");
+                JOptionPane.showMessageDialog(vista, "Que tenga buen día.");
                 System.exit(0);
             }
         } catch (Exception ex) {
@@ -146,9 +123,10 @@ public class MenuControlador extends Controlador {
 
     private void Usuarios(ActionEvent e) {
         try {
-            cerrarVentana();
+
             UsuariosController usuariosController = new UsuariosController(this.usuario, this);
             usuariosController.abrirVentana();
+            cerrarVentana();
         } catch (Exception ex) {
             DialogosUtil.mostrarDialogoDeError(vista, ex.getMessage());
         }

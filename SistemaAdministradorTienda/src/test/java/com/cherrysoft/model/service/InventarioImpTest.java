@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class InventarioImpTest {
 
-    private Faker faker = new Faker();
+    private final Faker faker = new Faker();
 
     public InventarioImpTest() {
     }
@@ -42,7 +42,9 @@ public class InventarioImpTest {
     public void testObtenerTodosLosArticulos() {
         System.out.println("obtenerTodosLosArticulos");
         InventarioImp instance = new InventarioImp();
-        instance.registrarArticulo(Integer.MAX_VALUE, faker.medical().medicineName(), faker.medical().symptoms(), BigDecimal.TEN, faker.number().randomDigit());
+        instance.registrarArticulo(Integer.MAX_VALUE, faker.medical().medicineName(),
+                faker.medical().symptoms(), BigDecimal.TEN, faker.number()
+                .randomDigit());
         List<Articulo> result = instance.obtenerTodosLosArticulos();
         assertTrue(result.size() > 0);
 

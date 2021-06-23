@@ -17,14 +17,15 @@ import javax.swing.JComboBox;
  * @author Equipo1
  */
 public class ComboBoxUtil {
-    private ClienteRepository clientesRepository;
-    private ArticuloRepository articulosRepository;    
+
+    private final ClienteRepository clientesRepository;
+    private final ArticuloRepository articulosRepository;
 
     public ComboBoxUtil() {
         this.clientesRepository = new ClienteRepository();
         this.articulosRepository = new ArticuloRepository();
     }
-    
+
     public JComboBox rellenarComboConClientes(JComboBox combo) {
         combo.removeAllItems();
         Iterable<Cliente> listaClientes = clientesRepository.findAll();
@@ -35,7 +36,7 @@ public class ComboBoxUtil {
         combo.setModel(model);
         return combo;
     }
-    
+
     public JComboBox rellenarComboConArticulos(JComboBox combo) {
         combo.removeAllItems();
         Iterable<Articulo> listaArticulos = articulosRepository.findAll();
@@ -45,6 +46,6 @@ public class ComboBoxUtil {
         });
         combo.setModel(model);
         return combo;
-    }    
-    
+    }
+
 }
