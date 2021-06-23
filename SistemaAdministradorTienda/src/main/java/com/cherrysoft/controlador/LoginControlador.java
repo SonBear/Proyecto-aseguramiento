@@ -14,12 +14,12 @@ public class LoginControlador extends Controlador {
 
     private final LoginView vista;
     private final UsuarioService usuarioService;
-
-    //private final MenuControlador menuControlador;
+    private final MenuControlador menuControlador;
+    
     public LoginControlador() {
         vista = new LoginView();
         usuarioService = new UsuarioImp();
-        //menuControlador = new MenuControlador();
+        menuControlador = new MenuControlador();
 
         configurarControlador();
     }
@@ -34,9 +34,9 @@ public class LoginControlador extends Controlador {
         this.vista.getTxtUsuario().setText("");
         this.vista.getTxtContrasenia().setText("");
         this.vista.setVisible(false);
-        //menuControlador.setControladorAnterior(this)
-        //menuControlador.setUsuario(this.usuario);
-        //menuControlador.abrirVentana();
+        menuControlador.setControladorAnterior(this);
+        menuControlador.setUsuario(this.usuario);
+        menuControlador.abrirVentana();
     }
 
     @Override

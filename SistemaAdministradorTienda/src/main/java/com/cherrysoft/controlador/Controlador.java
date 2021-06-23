@@ -35,6 +35,10 @@ public abstract class Controlador {
 
     public abstract void configurarControlador();
 
+    public void setControladorAnterior(Controlador controladorAnterior) {
+        this.controladorAnterior = controladorAnterior;
+    }
+    
     public void regresarControladorAnterior() {
         this.cerrarVentana();
         controladorAnterior.abrirVentana();
