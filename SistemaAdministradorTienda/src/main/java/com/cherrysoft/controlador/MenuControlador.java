@@ -60,12 +60,6 @@ public class MenuControlador extends Controlador {
     }
 
     @Override
-    public void regresarControladorAnterior() {
-        this.cerrarVentana();
-        controladorAnterior.abrirVentana();
-    }
-
-    @Override
     public void setControladorAnterior(Controlador controladorAnterior) {
         this.controladorAnterior = controladorAnterior;
     }
@@ -87,11 +81,11 @@ public class MenuControlador extends Controlador {
         }
     }
 
+    //PENDIENTE
     private void Clientes(ActionEvent e) {
         try {
             cerrarVentana();
-            UsuariosController usuariosController = new UsuariosController(this.usuario, this);
-            usuariosController.abrirVentana();
+
         } catch (Exception ex) {
             DialogosUtil.mostrarDialogoDeError(vista, ex.getMessage());
         }
@@ -144,17 +138,17 @@ public class MenuControlador extends Controlador {
     private void Tickets(ActionEvent e) {
         try {
             cerrarVentana();
-            
+
         } catch (Exception ex) {
             DialogosUtil.mostrarDialogoDeError(vista, ex.getMessage());
         }
     }
 
-    //PENDIENTE
     private void Usuarios(ActionEvent e) {
         try {
             cerrarVentana();
-
+            UsuariosController usuariosController = new UsuariosController(this.usuario, this);
+            usuariosController.abrirVentana();
         } catch (Exception ex) {
             DialogosUtil.mostrarDialogoDeError(vista, ex.getMessage());
         }
