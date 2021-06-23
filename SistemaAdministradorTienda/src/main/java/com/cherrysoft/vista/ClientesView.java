@@ -36,7 +36,6 @@ public class ClientesView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaClientes = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
         botonRegresar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -50,6 +49,7 @@ public class ClientesView extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtEmailActualizar = new javax.swing.JTextField();
+        botonActualizar = new javax.swing.JButton();
         botonEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -79,28 +79,20 @@ public class ClientesView extends javax.swing.JFrame {
             tablaClientes.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        jPanel4.setLayout(null);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -130,7 +122,6 @@ public class ClientesView extends javax.swing.JFrame {
         botonRegistrar.setForeground(new java.awt.Color(255, 255, 255));
         botonRegistrar.setText("Registrar");
         botonRegistrar.setBorderPainted(false);
-        botonRegistrar.setFocusPainted(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -148,7 +139,7 @@ public class ClientesView extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtClienteRegistro)
+                            .addComponent(txtClienteRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                             .addComponent(txtEmailRegistro)))
                     .addComponent(botonRegistrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -164,9 +155,9 @@ public class ClientesView extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtEmailRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addGap(34, 34, 34)
                 .addComponent(botonRegistrar)
-                .addGap(13, 13, 13)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -186,6 +177,12 @@ public class ClientesView extends javax.swing.JFrame {
 
         txtEmailActualizar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        botonActualizar.setBackground(new java.awt.Color(102, 102, 102));
+        botonActualizar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        botonActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        botonActualizar.setText("Actualizar");
+        botonActualizar.setBorderPainted(false);
+
         botonEliminar.setBackground(new java.awt.Color(102, 102, 102));
         botonEliminar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         botonEliminar.setForeground(new java.awt.Color(255, 255, 255));
@@ -199,7 +196,6 @@ public class ClientesView extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -207,7 +203,9 @@ public class ClientesView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtClienteActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
-                            .addComponent(txtEmailActualizar))))
+                            .addComponent(txtEmailActualizar)))
+                    .addComponent(botonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -221,9 +219,11 @@ public class ClientesView extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtEmailActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(88, 88, 88)
+                .addGap(47, 47, 47)
+                .addComponent(botonActualizar)
+                .addGap(18, 18, 18)
                 .addComponent(botonEliminar)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelFondoLayout = new javax.swing.GroupLayout(jPanelFondo);
@@ -282,6 +282,7 @@ public class ClientesView extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonActualizar;
     private javax.swing.JButton botonEliminar;
     private javax.swing.JButton botonRegistrar;
     private javax.swing.JButton botonRegresar;
@@ -293,7 +294,6 @@ public class ClientesView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanelFondo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaClientes;
@@ -302,4 +302,78 @@ public class ClientesView extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmailActualizar;
     private javax.swing.JTextField txtEmailRegistro;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getBotonActualizar() {
+        return botonActualizar;
+    }
+
+    public void setBotonActualizar(JButton botonActualizar) {
+        this.botonActualizar = botonActualizar;
+    }
+
+    public JButton getBotonEliminar() {
+        return botonEliminar;
+    }
+
+    public void setBotonEliminar(JButton botonEliminar) {
+        this.botonEliminar = botonEliminar;
+    }
+
+    public JButton getBotonRegistrar() {
+        return botonRegistrar;
+    }
+
+    public void setBotonRegistrar(JButton botonRegistrar) {
+        this.botonRegistrar = botonRegistrar;
+    }
+
+    public JButton getBotonRegresar() {
+        return botonRegresar;
+    }
+
+    public void setBotonRegresar(JButton botonRegresar) {
+        this.botonRegresar = botonRegresar;
+    }
+
+    public JTable getTablaClientes() {
+        return tablaClientes;
+    }
+
+    public void setTablaClientes(JTable tablaClientes) {
+        this.tablaClientes = tablaClientes;
+    }
+
+    public JTextField getTxtClienteActualizar() {
+        return txtClienteActualizar;
+    }
+
+    public void setTxtClienteActualizar(JTextField txtClienteActualizar) {
+        this.txtClienteActualizar = txtClienteActualizar;
+    }
+
+    public JTextField getTxtClienteRegistro() {
+        return txtClienteRegistro;
+    }
+
+    public void setTxtClienteRegistro(JTextField txtClienteRegistro) {
+        this.txtClienteRegistro = txtClienteRegistro;
+    }
+
+    public JTextField getTxtEmailActualizar() {
+        return txtEmailActualizar;
+    }
+
+    public void setTxtEmailActualizar(JTextField txtEmailActualizar) {
+        this.txtEmailActualizar = txtEmailActualizar;
+    }
+
+    public JTextField getTxtEmailRegistro() {
+        return txtEmailRegistro;
+    }
+
+    public void setTxtEmailRegistro(JTextField txtEmailRegistro) {
+        this.txtEmailRegistro = txtEmailRegistro;
+    }
+
+
 }
