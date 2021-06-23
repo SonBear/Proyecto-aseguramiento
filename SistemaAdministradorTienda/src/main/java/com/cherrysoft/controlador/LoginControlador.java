@@ -15,13 +15,11 @@ public class LoginControlador extends Controlador {
 
     private final LoginView vista;
     private final UsuarioService usuarioService;
-    private final MenuControlador menuControlador;
-    
+    private MenuControlador menuControlador;
+
     public LoginControlador() {
         vista = new LoginView();
         usuarioService = new UsuarioImp();
-        menuControlador = new MenuControlador();
-
         configurarControlador();
     }
 
@@ -34,10 +32,8 @@ public class LoginControlador extends Controlador {
     public void cerrarVentana() {
         this.vista.getTxtUsuario().setText("");
         this.vista.getTxtContrasenia().setText("");
-        this.vista.setVisible(false);
-        menuControlador.setControladorAnterior(this);
-        menuControlador.setUsuario(this.usuario);
-        menuControlador.abrirVentana();
+        this.vista.dispose();
+
     }
 
     @Override
@@ -56,6 +52,8 @@ public class LoginControlador extends Controlador {
         String contrasenia = vista.getTxtContrasenia().getText();
         try {
             this.usuario = usuarioService.login(usuarioNombre, contrasenia);
+            menuControlador = new MenuControlador(usuario, this);
+            menuControlador.abrirVentana();
             cerrarVentana();
         } catch (Exception ex) {
             DialogosUtil.mostrarDialogoDeError(vista, ex.getMessage());
