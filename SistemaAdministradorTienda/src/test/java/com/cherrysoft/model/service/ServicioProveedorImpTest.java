@@ -31,7 +31,7 @@ public class ServicioProveedorImpTest {
     public ServicioProveedorImpTest() {
         utilidades = new PromocionesTestUtil();
     }
-    
+
     @BeforeAll
     public static void setup() {
         servicioProveedores = new ServicioProveedoresImp();
@@ -121,11 +121,11 @@ public class ServicioProveedorImpTest {
 
         Assertions.assertEquals(3, articulosActuales.size());
     }
-    
+
     @Test
-    public void obtenerMontoPagoProveedor(){
+    public void obtenerMontoPagoProveedor() {
         System.out.println("Corriendo prueba monto total de pago de articulos de un proveedor...");
-        
+
         Usuario usuario = new Usuario();
         usuario.setCorreo(faker.internet().emailAddress());
         usuario.setContrasenia(faker.internet().password());
@@ -144,7 +144,7 @@ public class ServicioProveedorImpTest {
 
         CompraProveedor compraProveedor = crearCompraProveedor(articuloProveedor1, usuario);
         CompraProveedor compraProveedor2 = crearCompraProveedor(articuloProveedor2, usuario);
-        
+
         listaComprasProveedor.add(compraProveedor);
         listaComprasProveedor.add(compraProveedor2);
 
@@ -152,10 +152,10 @@ public class ServicioProveedorImpTest {
 
         servicioProveedores.save(proveedor);
         servicioProveedores.saveUser(usuario);
-        
-        BigDecimal montoEsperado = BigDecimal.valueOf(80); 
+
+        BigDecimal montoEsperado = BigDecimal.valueOf(80);
         BigDecimal montoActual = servicioProveedores.obtenerMontoPagoProveedor(proveedor.getId(), usuario.getId());
-        
+
         Assertions.assertEquals(montoEsperado, montoActual);
     }
 
@@ -227,7 +227,7 @@ public class ServicioProveedorImpTest {
 
     private Articulo crearArticulo() {
         Articulo articulo = new Articulo();
-        articulo.setId(faker.random().nextInt(1, 17));
+        articulo.setId(faker.random().nextInt(100, 177));
         articulo.setNombre(faker.commerce().productName());
         articulo.setPrecio(new BigDecimal(faker.number().randomDouble(2, 10, 150)));
         articulo.setCantidad(faker.random().nextInt(1, 10));

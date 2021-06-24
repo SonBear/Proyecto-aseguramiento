@@ -32,10 +32,10 @@ public class ControladorProveedor extends Controlador {
 
     private void guardar(ActionEvent event) {
         Proveedor proveedor = new Proveedor();
-        if(validarCampos()){
+        if (validarCampos()) {
             actualizarCampos(proveedor);
             proveedoresRepository.save(proveedor);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(proveedoresForm, "Datos incompletos. Por favor de proporcionar todos los datos");
         }
         actualizarTabla();
@@ -47,7 +47,7 @@ public class ControladorProveedor extends Controlador {
 
     private void actualizar(ActionEvent event) {
         Proveedor proveedorSelecionado = getProveedorSelectedTable();
-        proveedoresForm.setTxtID(proveedorSelecionado.getId()+"");
+        proveedoresForm.setTxtID(proveedorSelecionado.getId() + "");
         actualizarCampos(proveedorSelecionado);
         proveedoresRepository.update(proveedorSelecionado);
         actualizarTabla();
@@ -69,13 +69,13 @@ public class ControladorProveedor extends Controlador {
         proveedor.setEmail(proveedoresForm.getTxtEmail());
         proveedor.setTelefono(proveedoresForm.getTxtTelefono());
     }
-    
-    private boolean validarCampos(){
+
+    private boolean validarCampos() {
         boolean estaNombre = !proveedoresForm.getTxtNombre().equals("");
         boolean estaEmail = !proveedoresForm.getTxtEmail().equals("");
         boolean estaDireccion = !proveedoresForm.getTxtDireccion().equals("");
         boolean estaTelefono = !proveedoresForm.getTxtTelefono().equals("");
-        
+
         return estaNombre && estaEmail && estaDireccion && estaTelefono;
     }
 
@@ -86,9 +86,9 @@ public class ControladorProveedor extends Controlador {
         proveedoresForm.setTxtDireccion("");
         proveedoresForm.setTxtTelefono("");
     }
-    
+
     private void actualizarCamposVista(Proveedor proveedor) {
-        proveedoresForm.setTxtID(proveedor.getId()+"");
+        proveedoresForm.setTxtID(proveedor.getId() + "");
         proveedoresForm.setTxtNombre(proveedor.getNombre());
         proveedoresForm.setTxtEmail(proveedor.getEmail());
         proveedoresForm.setTxtDireccion(proveedor.getDireccion());
@@ -133,7 +133,6 @@ public class ControladorProveedor extends Controlador {
             });
         });
     }
-    
 
     @Override
     public void abrirVentana() {
@@ -155,7 +154,7 @@ public class ControladorProveedor extends Controlador {
         proveedoresForm.getBtnNuevo().addActionListener(this::crear);
         proveedoresForm.getBtnActualizar().addActionListener(this::actualizar);
         proveedoresForm.getBtnEliminar().addActionListener(this::eliminar);
-        proveedoresForm.getBtnSalir().addActionListener(this::salir);
+        proveedoresForm.getBtnSalir().addActionListener((e) -> this.regresarControladorAnterior());
         actualizarTabla();
     }
 

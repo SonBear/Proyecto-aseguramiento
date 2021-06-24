@@ -5,10 +5,10 @@
  */
 package com.cherrysoft.model.service;
 
-import com.cherrysoft.model.data.Permiso;
 import com.cherrysoft.model.data.Rol;
-import com.cherrysoft.model.data.Usuario;
 import com.cherrysoft.seguridad.ConfiguracionSistema;
+import com.cherrysoft.model.data.Usuario;
+import com.cherrysoft.model.service.UsuarioImp;
 import com.github.javafaker.Faker;
 import java.util.List;
 import java.util.Objects;
@@ -33,6 +33,7 @@ public class UsuarioImpTest {
 
     @BeforeAll
     public static void setUpClass() {
+
     }
 
     @AfterAll
