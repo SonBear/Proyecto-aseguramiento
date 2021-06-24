@@ -45,7 +45,7 @@ public class ClienteRepositoryTest {
     @Test
     public void testObtenerClientePor() throws Exception {
         System.out.println("obtenerClientePor");
-        String cliente = "Luettgen";
+        String cliente = "Ullrich";
         ClienteRepository instance = new ClienteRepository();
         ClientesImp instance2 = new ClientesImp();
         Cliente expResult = instance2.obtenerClientePorId(3);
