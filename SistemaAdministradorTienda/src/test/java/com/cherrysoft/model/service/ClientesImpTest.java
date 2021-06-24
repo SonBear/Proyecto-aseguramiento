@@ -6,7 +6,6 @@
 package com.cherrysoft.model.service;
 
 import com.cherrysoft.model.data.Cliente;
-import com.cherrysoft.seguridad.ConfiguracionSistema;
 import com.github.javafaker.Faker;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
