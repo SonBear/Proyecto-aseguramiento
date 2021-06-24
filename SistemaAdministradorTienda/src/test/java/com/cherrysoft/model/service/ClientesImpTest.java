@@ -95,19 +95,4 @@ public class ClientesImpTest {
         Cliente result = instance.actualizarDatosCliente(cliente, nombreCliente, email);
         assertTrue(result.getCorreo().equals(email));
     }
-
-    /**
-     * Test of obtenerClientePorId method, of class ClientesImp.
-     */
-    /*@Test
-    public void testObtenerClientePorId() throws Exception {
-        System.out.println("obtenerClientePorId");
-        Integer id = null;
-        ClientesImp instance = new ClientesImp();
-        Cliente expResult = null;
-        Cliente result = instance.obtenerClientePorId(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/
 }
