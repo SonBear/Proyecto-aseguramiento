@@ -63,13 +63,13 @@ public class ClientesView extends javax.swing.JFrame {
 
         tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Nombre", "Correo"
+                "ID", "Nombre", "Correo"
             }
         ));
         tablaClientes.getTableHeader().setReorderingAllowed(false);
@@ -77,6 +77,7 @@ public class ClientesView extends javax.swing.JFrame {
         if (tablaClientes.getColumnModel().getColumnCount() > 0) {
             tablaClientes.getColumnModel().getColumn(0).setResizable(false);
             tablaClientes.getColumnModel().getColumn(1).setResizable(false);
+            tablaClientes.getColumnModel().getColumn(2).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
