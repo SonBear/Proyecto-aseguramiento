@@ -16,6 +16,9 @@ public class PromocionGeneralArticulos extends Promocion implements Serializable
     @Column
     private Double descuento;
 
+    public PromocionGeneralArticulos() {
+    }
+
     public PromocionGeneralArticulos(Double descuento) {
         this.descuento = descuento;
     }

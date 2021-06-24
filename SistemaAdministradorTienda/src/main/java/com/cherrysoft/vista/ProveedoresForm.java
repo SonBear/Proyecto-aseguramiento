@@ -166,7 +166,7 @@ public class ProveedoresForm extends javax.swing.JFrame {
                     .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(28, 28, 28))
         );
         jPanel4Layout.setVerticalGroup(
@@ -217,7 +217,6 @@ public class ProveedoresForm extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
     public JButton getBtnActualizar() {
         return btnActualizar;
     }
@@ -241,7 +240,7 @@ public class ProveedoresForm extends javax.swing.JFrame {
     public String getTxtDireccion() {
         return txtDireccion.getText();
     }
-    
+
     public void setTxtDireccion(String direccion) {
         this.txtDireccion.setText(direccion);
     }
@@ -249,7 +248,7 @@ public class ProveedoresForm extends javax.swing.JFrame {
     public String getTxtEmail() {
         return txtEmail.getText();
     }
-    
+
     public void setTxtEmail(String email) {
         this.txtEmail.setText(email);
     }
@@ -257,7 +256,7 @@ public class ProveedoresForm extends javax.swing.JFrame {
     public String getTxtID() {
         return txtID.getText();
     }
-    
+
     public void setTxtID(String id) {
         this.txtID.setText(id);
     }
@@ -265,7 +264,7 @@ public class ProveedoresForm extends javax.swing.JFrame {
     public String getTxtNombre() {
         return txtNombre.getText();
     }
-    
+
     public void setTxtNombre(String nombre) {
         this.txtNombre.setText(nombre);
     }
@@ -273,7 +272,7 @@ public class ProveedoresForm extends javax.swing.JFrame {
     public String getTxtTelefono() {
         return txtTelefono.getText();
     }
-    
+
     public void setTxtTelefono(String telefono) {
         this.txtTelefono.setText(telefono);
     }
@@ -281,7 +280,6 @@ public class ProveedoresForm extends javax.swing.JFrame {
     public JTable getTablaProveedores() {
         return tablaProveedores;
     }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
