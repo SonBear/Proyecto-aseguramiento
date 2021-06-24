@@ -55,11 +55,11 @@ public class MenuControlador extends Controlador {
         }
     }
 
-    //PENDIENTE
     private void Clientes(ActionEvent e) {
         try {
+            ClientesControlador clientesControlador = new ClientesControlador(this.usuario, this);
+            clientesControlador.abrirVentana();
             cerrarVentana();
-
         } catch (Exception ex) {
             DialogosUtil.mostrarDialogoDeError(vista, ex.getMessage());
         }
@@ -67,7 +67,6 @@ public class MenuControlador extends Controlador {
 
     private void Inventario(ActionEvent e) {
         try {
-
             InventarioControlador inventarioControlador = new InventarioControlador(usuario, this);
             inventarioControlador.abrirVentana();
             cerrarVentana();
@@ -82,18 +81,17 @@ public class MenuControlador extends Controlador {
             ControladorPromociones controladorPromociones = new ControladorPromociones(this.usuario, this);
             controladorPromociones.abrirVentana();
             cerrarVentana();
-
         } catch (Exception ex) {
             DialogosUtil.mostrarDialogoDeError(vista, ex.getMessage());
         }
 
     }
 
-    //PENDIENTE
     private void Proveedores(ActionEvent e) {
         try {
             cerrarVentana();
-
+            ControladorProveedor controladorProveedor = new ControladorProveedor(this.usuario, this);
+            controladorProveedor.abrirVentana();
         } catch (Exception ex) {
             DialogosUtil.mostrarDialogoDeError(vista, ex.getMessage());
         }
@@ -123,7 +121,6 @@ public class MenuControlador extends Controlador {
 
     private void Usuarios(ActionEvent e) {
         try {
-
             UsuariosController usuariosController = new UsuariosController(this.usuario, this);
             usuariosController.abrirVentana();
             cerrarVentana();
