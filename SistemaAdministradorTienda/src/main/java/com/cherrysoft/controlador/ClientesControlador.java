@@ -26,7 +26,6 @@ public class ClientesControlador extends Controlador {
     private final ClientesView vista;
     private final ClientesService clienteService;
     private Cliente clienteSeleccionado;
-    protected Controlador controladorAnterior;
     
     public ClientesControlador(Usuario usuario, Controlador controladorAnterior) {
         super(usuario, controladorAnterior);
@@ -58,7 +57,7 @@ public class ClientesControlador extends Controlador {
         vista.getBotonRegresar().addActionListener((e) -> regresarControladorAnterior());
     }
 
-    private Cliente getClienteSelectedTable() {
+    private Cliente obtenerClienteSeleccionadoEnTabla() {
 
         Object[] fila = TablaManager.obtenerFilaSeleccionada(vista.getTablaClientes());
         if (Objects.isNull(fila)) {
@@ -75,7 +74,7 @@ public class ClientesControlador extends Controlador {
     }
     
     private void hacerClickTabla(MouseEvent e) {
-        this.clienteSeleccionado = getClienteSelectedTable();
+        this.clienteSeleccionado = obtenerClienteSeleccionadoEnTabla();
         if (!Objects.isNull(this.clienteSeleccionado)) {
             vista.getTxtEmailActualizar().setText(clienteSeleccionado.getCorreo());
             vista.getTxtClienteActualizar().setText(clienteSeleccionado.getNombre());

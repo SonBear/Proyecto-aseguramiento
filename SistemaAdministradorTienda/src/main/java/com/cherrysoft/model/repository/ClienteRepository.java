@@ -5,11 +5,11 @@ import java.util.stream.StreamSupport;
 
 /**
  *
- * @author Emmanuel Chable
+ * @author Victor Cauich
  */
 public class ClienteRepository extends CrudRepository<Cliente, Integer> {
 
-    public Cliente obtenerClientePor(String cliente) {
+    public Cliente obtenerClientePorNombre(String cliente) {
         Cliente clnte = StreamSupport
                 .stream(this.findAll().spliterator(), false)
                 .filter((us) -> us.getNombre().equals(cliente))
