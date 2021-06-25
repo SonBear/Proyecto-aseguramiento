@@ -40,16 +40,16 @@ public class ClienteRepositoryTest {
     }
 
     /**
-     * Test of obtenerClientePor method, of class ClienteRepository.
+     * Test of obtenerClientePorNombre method, of class ClienteRepository.
      */
     @Test
-    public void testObtenerClientePor() throws Exception {
+    public void testObtenerClientePorNombre() throws Exception {
         System.out.println("obtenerClientePor");
         String cliente = "Ullrich";
         ClienteRepository instance = new ClienteRepository();
         ClientesImp instance2 = new ClientesImp();
         Cliente expResult = instance2.obtenerClientePorId(3);
-        Cliente result = instance.obtenerClientePor(cliente);
+        Cliente result = instance.obtenerClientePorNombre(cliente);
         assertEquals(expResult, result);
     }
     

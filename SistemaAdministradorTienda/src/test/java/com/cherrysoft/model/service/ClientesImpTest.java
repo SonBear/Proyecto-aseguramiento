@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cherrysoft.model.service;
 
 import com.cherrysoft.model.data.Cliente;
+import com.cherrysoft.model.repository.ClienteRepository;
 import com.github.javafaker.Faker;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -44,21 +40,26 @@ public class ClientesImpTest {
     }
 
     /**
-     * Test of registrarCliente method, of class ClientesImp.
+     * Test del metodo registrarCliente, de la clase ClientesImp.
+     * @throws java.lang.Exception
      */
     @Test
     public void testRegistrarCliente() throws Exception {
         System.out.println("REGISTRARCLIENTE");
         String cliente = faker.name().lastName();
         String email = "correoprueba" + faker.name().lastName() + "@gmail.com";
+        Cliente clienteResultado;
 
         ClientesImp instance = new ClientesImp();
         instance.registrarCliente(cliente, email);
-        assertTrue(true);
+        
+        ClienteRepository clienteRepository = new ClienteRepository();
+        clienteResultado = clienteRepository.obtenerClientePorNombre(cliente);
+        assertTrue(clienteResultado != null);
     }
 
     /**
-     * Test of obtenerClientes method, of class ClientesImp.
+     * Test del metodo obtenerClientes, de la clase ClientesImp.
      */
     @Test
     public void testObtenerClientes() {
@@ -69,7 +70,7 @@ public class ClientesImpTest {
     }
 
     /**
-     * Test of eliminarCliente method, of class ClientesImp.
+     * Test del metodo eliminarCliente, de la clase ClientesImp.
      */
     @Test
     public void testEliminarCliente() throws Exception {
@@ -82,7 +83,7 @@ public class ClientesImpTest {
     }
 
     /**
-     * Test of actualizarDatosCliente method, of class ClientesImp.
+     * Test del metodo actualizarDatosCliente, de la clase ClientesImp.
      */
     @Test
     public void testActualizarDatosCliente() throws Exception {
