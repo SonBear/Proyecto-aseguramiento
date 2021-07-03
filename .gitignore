@@ -45,6 +45,8 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
+#Persistence
+**/META-INF/persistence.xml
 
 # OS
 .DS_Store
@@ -54,3 +56,7 @@ nb-configuration.xml
 release.properties
 pom.xml.releaseBackup
 pom.xml.tag
+
+# docker
+docker-compose.yml
+
